@@ -12,6 +12,18 @@ const int sensor5 = 13;
 const byte speed = 80;
 const byte turn_speed = 60;
 
+const byte trigPin1 = 19;  // 右邊超音波 觸發腳Trig
+const byte echoPin1 = 18;  // 右邊超音波 接收腳 Echo
+int distance1;             // 距離 cm
+
+const byte trigPin2 = 17;  // 左邊超音波 觸發腳Trig
+const byte echoPin2 = 16;  // 左邊超音波 接收腳 Echo
+int distance2;            // 距離 cm
+
+const byte trigPin3 = 15;  // 左邊超音波 觸發腳Trig
+const byte echoPin3 = 14;  // 左邊超音波 接收腳 Echo
+int distance3;    
+
 // can 1 => a
 // can 2 => b => e
 // can 3 => b => e
@@ -32,10 +44,35 @@ void setup() {
   pinMode(sensor3, INPUT);
   pinMode(sensor4, INPUT);
   pinMode(sensor5, INPUT);
+
+  pinMode(trigPin1, OUTPUT);
+  pinMode(echoPin1, INPUT);
+
+  pinMode(trigPin2, OUTPUT);
+  pinMode(echoPin2, INPUT);
+
+  pinMode(trigPin3, OUTPUT);
+  pinMode(echoPin3, INPUT);
 }
 
 void loop() {
   tracing();
+
+  distance1 = ping1();  // 更新距離值
+  distance2 = ping2();
+  distance3 = ping3();
+
+  Serial.print("Distance1: ");  // 輸出距離到串口
+  Serial.print(distance1);
+  Serial.println(" cm");
+  Serial.print("Distance2: ");
+  Serial.print(distance2);
+  Serial.println(" cm");
+  Serial.print("Distance3: ");
+  Serial.print(distance3);
+  Serial.println(" cm");
+
+  delay(1000);  // 延遲1000毫秒再次測量距離
 }
 
 //前進
