@@ -24,6 +24,27 @@ const byte trigPin3 = 15;  // 左邊超音波 觸發腳Trig
 const byte echoPin3 = 14;  // 左邊超音波 接收腳 Echo
 int distance3;    
 
+unsigned long ping1() {
+    digitalWrite(trigPin1, HIGH); // 觸發腳位設定為高電位
+    delayMicroseconds(10); // 持續10微秒
+    digitalWrite(trigPin1, LOW);
+    return (pulseIn(echoPin1, HIGH) / 58.2); // 換算成 cm 並傳回
+}
+
+unsigned long ping2() {
+    digitalWrite(trigPin2, HIGH); // 觸發腳位設定為高電位
+    delayMicroseconds(10); // 持續10微秒
+    digitalWrite(trigPin2, LOW);
+    return (pulseIn(echoPin2, HIGH) / 58.2); // 換算成 cm 並傳回
+}
+
+unsigned long ping3() {
+    digitalWrite(trigPin3, HIGH); // 觸發腳位設定為高電位
+    delayMicroseconds(10); // 持續10微秒
+    digitalWrite(trigPin3, LOW);
+    return (pulseIn(echoPin3, HIGH) / 58.2); // 換算成 cm 並傳回
+}
+
 // can 1 => a
 // can 2 => b => e
 // can 3 => b => e
@@ -75,48 +96,3 @@ void loop() {
   delay(1000);  // 延遲1000毫秒再次測量距離
 }
 
-//前進
-void Forward() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-  analogWrite(enA, speed);
-  analogWrite(enB, speed);
-  Serial.println("forward");
-}
-
-//後退
-void Back() {
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
-  analogWrite(enA, turn_speed);
-  analogWrite(enB, turn_speed);
-  Serial.println("back");
-}
-//左轉
-void TurnLeft() {
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-  analogWrite(enA, 0);
-  analogWrite(enB, turn_speed);
-  Serial.println("left");
-}
-
-//右轉
-void TurnRight() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  analogWrite(enA, turn_speed);
-  analogWrite(enB, 0);
-  Serial.println("right");
-}
-
-//停止
-void Stop() {
-  analogWrite(enA, 0);
-  analogWrite(enB, 0);
-  Serial.println("stop");
-}
