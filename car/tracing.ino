@@ -27,7 +27,9 @@ void tracing() {
   else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
     TurnRight();
   }
-
+  else{
+    Stop();
+  }
   switch (n){
     case  'A':
       tracing();
