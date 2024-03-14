@@ -1,15 +1,15 @@
 #include <SPI.h>
 #include <MFRC522.h>  // 引用程式庫
 
-#define SS_PIN 10  // 讀卡機的重製腳位
-#define RST_PIN 9  // 晶片選擇腳位
+#define SS_PIN 10  // 晶片選擇腳位
+#define RST_PIN 9  // 讀卡機的重製腳位
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
 
 #define MAX_CARDS 4  // 最大不同卡號數量
 
 String cardIDs[MAX_CARDS] = { "E0DD9218", "CC6F3BD5", "8054E119", "E0EAA718" };  // 定義四個卡號ID
-String cardNames[MAX_CARDS] = { "卡號一", "卡號二", "卡號三", "卡號四" };        // 對應卡號名稱
+String cardNames[MAX_CARDS] = { "1", "2", "3", "4" };        // 對應卡號名稱
 int cardCounts[MAX_CARDS] = { 0 };                                               // 每個卡號的計數器
 
 void setup() {
