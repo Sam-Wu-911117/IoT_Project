@@ -2,8 +2,12 @@
 #include <SPI.h>
 #include <MFRC522.h>  // 引用程式庫
 
-#define SS_PIN 10  // 晶片選擇腳位
-#define RST_PIN 9  // 讀卡機的重製腳位
+#define SS_PIN 10  // SDA
+#define RST_PIN 9  //  RST
+//SCK 13
+//MOSI 11
+//MISO 12
+
 
 const byte rxPin = A4;
 const byte txPin = A5;
