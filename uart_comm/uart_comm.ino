@@ -8,7 +8,6 @@
 //MOSI 11
 //MISO 12
 
-
 const byte rxPin = A4;
 const byte txPin = A5;
 SoftwareSerial Ser(rxPin, txPin);
