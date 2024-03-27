@@ -112,9 +112,6 @@ void setup() {
   
   pinMode(rxPin, INPUT);
   pinMode(txPin, OUTPUT);
-
-  pinMode(RX, INPUT);
-  pinMode(TX, OUTPUT);
            
   Serial.println("請放置卡片");  // 提示請放置卡片
   while (!Ser) {}
