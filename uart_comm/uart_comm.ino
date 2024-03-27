@@ -73,8 +73,10 @@ void loop() {
         //   delay(1000);
         //   }
         //LoRa 送出 
-        uint8_t cardName[i] = cards[i].cardNames;
-        rf95.send(cardName,sizeof(cardName));
+        char cardName[20];
+        strcpy(cardName, cards[i].cardNames.c_str());
+
+        rf95.send((uint8_t*)cardName, strlen(cardName));
         rf95.waitPacketSent();
 
         // 等待回覆
