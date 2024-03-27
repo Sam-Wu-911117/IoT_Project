@@ -1,11 +1,17 @@
 #include <SoftwareSerial.h>
 #include <SPI.h>
 #include <MFRC522.h> 
-
-//softwareserial
+#include <RH_RF95.h>
+//softwareserial for rpi
 const byte rxPin = 15;  //rpi GPIO 14 右邊從上往下數第四個
 const byte txPin = 14;  //rpi GPIO 15 右邊從上往下數第五個
 SoftwareSerial Ser(rxPin, txPin); //gnd 右邊從上往下數第三個
+
+//softwareserial for LoRa
+const byte RX = A0; //LoRa TX 
+const byte TX = A1; //LoRa RX 
+SoftwareSerial Lora(RX,TX);
+
 
 //RFID
 #define SS_PIN 53  // SDA
@@ -106,9 +112,18 @@ void setup() {
   
   pinMode(rxPin, INPUT);
   pinMode(txPin, OUTPUT);
+
+  pinMode(RX, INPUT);
+  pinMode(TX, OUTPUT);
            
   Serial.println("請放置卡片");  // 提示請放置卡片
   while (!Ser) {}
+
+    if (!rf95.init()) {
+    ShowSerial.println("init failed");
+    while (1);
+  }
+  rf95.setFrequency(433.0);
 
   // pinMode(trigPin3, OUTPUT);
   // pinMode(echoPin3, INPUT);

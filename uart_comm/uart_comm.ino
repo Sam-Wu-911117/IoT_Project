@@ -8,8 +8,8 @@
 //MOSI 11
 //MISO 12
 
-const byte rxPin = A4;
-const byte txPin = A5;
+const byte rxPin = A4; //gpio14
+const byte txPin = A5; //gpio15
 SoftwareSerial Ser(rxPin, txPin);
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
