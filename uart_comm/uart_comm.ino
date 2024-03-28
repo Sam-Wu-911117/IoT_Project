@@ -4,8 +4,8 @@
 #include <RH_RF95.h>
 
 //softwareserial for LoRa
-const byte RX = A0; //LoRa TX 
-const byte TX = A1; //LoRa RX 
+const byte RX = 5; //LoRa TX 
+const byte TX = 6; //LoRa RX 
 SoftwareSerial Lora(RX,TX);
 RH_RF95<SoftwareSerial> rf95(Lora);
 
@@ -35,9 +35,9 @@ Card cards[] = {
 int cardCounts[MAX_CARDS] = { 0,0,0,0 };
 
 void setup() {
+  Serial.begin(115200);   
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
-  rf95.setFrequency(433.0);
   // pinMode(rxPin, INPUT);
   // pinMode(txPin, OUTPUT);
   if (!rf95.init()) {
@@ -45,8 +45,7 @@ void setup() {
     while (1);
   }
   rf95.setFrequency(433.0);
-  //Ser.begin(9600);
-  Serial.begin(9600);           
+  //Ser.begin(9600);    
   Serial.println("請放置卡片");  // 提示請放置卡片
   //while (!Ser) {}
 }
@@ -67,7 +66,7 @@ void loop() {
     bool found = false;
     for (int i = 0; i < MAX_CARDS; i++) {  // 檢查卡號是否已存在於陣列中
       if (cardID == cards[i].cardIDs) {          //如果找到匹配的卡號
-        Serial.print(cards[i].cardNames);        //輸出對應卡號名稱
+        Serial.println(cards[i].cardNames);        //輸出對應卡號名稱
         // if(Ser.available()){
         //   Ser.print(String(cardNames[i]));
         //   delay(1000);
