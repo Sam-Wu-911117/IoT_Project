@@ -1,17 +1,18 @@
 #include <RH_RF95.h>
 #include <SoftwareSerial.h>
 
-//rpi
-const byte RX = A1; //gpio14
-const byte TX = A2; //gpio15
-SoftwareSerial Ser(RX,TX); 
+// //rpi
+// const byte RX = A1; //gpio14
+// const byte TX = A2; //gpio15
+// SoftwareSerial Ser(RX,TX); 
 
 //LoRa
-SoftwareSerial COMSerial(5, 6);  // RX(yellow), TX(white)
+SoftwareSerial COMSerial(15, 14);  // RX(yellow), TX(white)
 RH_RF95<SoftwareSerial> rf95(COMSerial);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  //Serial.println("RF95 server test."); 
   if (!rf95.init()) {
     Serial.println("init failed");
     while (1);
@@ -28,4 +29,5 @@ void loop() {
       Serial.println((char*)buf);
     } 
   }
+  //delay(1000);
 }
