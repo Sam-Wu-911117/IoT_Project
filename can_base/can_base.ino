@@ -11,7 +11,7 @@ SoftwareSerial COMSerial(15, 14);  // RX(yellow), TX(white)
 RH_RF95<SoftwareSerial> rf95(COMSerial);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   //Serial.println("RF95 server test."); 
   if (!rf95.init()) {
     Serial.println("init failed");

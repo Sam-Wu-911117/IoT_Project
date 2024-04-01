@@ -3,21 +3,16 @@
 #include <MFRC522.h>  // 引用程式庫
 #include <RH_RF95.h>
 
-//softwareserial for LoRa
+//softwareserial(UNO) for LoRa 
 const byte RX = 5; //LoRa TX 
 const byte TX = 6; //LoRa RX 
 SoftwareSerial Lora(RX,TX);
 RH_RF95<SoftwareSerial> rf95(Lora);
 
-// const byte rxPin = A4; //gpio14
-// const byte txPin = A5; //gpio15
-// SoftwareSerial Ser(rxPin, txPin);
-
 #define SS_PIN 10  // SDA
 #define RST_PIN 9  //  RST
-//SCK 13
-//MOSI 11
-//MISO 12
+//SCK 13,MOSI 11,MISO 12
+
 char *reference;
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
 const int MAX_CARDS = 4;  // 最大不同卡號數量
@@ -30,24 +25,18 @@ Card cards[] = {
   { "E0DD9218" ,"num1" },{ "CC6F3BD5" ,"num2" },{ "8054E119" ,"num3" },{ "E0EAA718" ,"num4" }
 };
 
-//String cardIDs[MAX_CARDS] = { "E0DD9218", "CC6F3BD5", "8054E119", "E0EAA718" };  // 定義四個卡號ID
-//String cardNames[MAX_CARDS] = { "num1", "num2", "num3", "num4" }; // 對應卡號名稱
-int cardCounts[MAX_CARDS] = { 0,0,0,0 };
+int cardCounts[MAX_CARDS] = { 0 };
 
 void setup() {
-  Serial.begin(115200);   
+  Serial.begin(9600);   
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
-  // pinMode(rxPin, INPUT);
-  // pinMode(txPin, OUTPUT);
   if (!rf95.init()) {
     Serial.println("init failed");
     while (1);
   }
   rf95.setFrequency(433.0);
-  //Ser.begin(9600);    
-  Serial.println("請放置卡片");  // 提示請放置卡片
-  //while (!Ser) {}
+  Serial.println("請放置卡片"); 
 }
 
 void loop() {
@@ -67,14 +56,10 @@ void loop() {
     for (int i = 0; i < MAX_CARDS; i++) {  // 檢查卡號是否已存在於陣列中
       if (cardID == cards[i].cardIDs) {          //如果找到匹配的卡號
         Serial.println(cards[i].cardNames);        //輸出對應卡號名稱
-        // if(Ser.available()){
-        //   Ser.print(String(cardNames[i]));
-        //   delay(1000);
-        //   }
+
         //LoRa 送出 
         char cardName[20];
         strcpy(cardName, cards[i].cardNames.c_str());
-
         rf95.send((uint8_t*)cardName, strlen(cardName));
         rf95.waitPacketSent();
 
