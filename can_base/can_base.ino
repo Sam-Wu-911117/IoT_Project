@@ -7,11 +7,15 @@
 // SoftwareSerial Ser(RX,TX); 
 
 //LoRa
-SoftwareSerial COMSerial(15, 14);  // RX(yellow), TX(white)
+const byte RX = 15; //LoRa TX (yellow)
+const byte TX = 14; //LoRa RX (white)
+SoftwareSerial COMSerial(RX,TX);  
 RH_RF95<SoftwareSerial> rf95(COMSerial);
 
 void setup() {
   Serial.begin(9600);
+  pinMode(2,INPUT);
+  pinMode(3,OUTPUT);
   //Serial.println("RF95 server test."); 
   if (!rf95.init()) {
     Serial.println("init failed");
