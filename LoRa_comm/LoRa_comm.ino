@@ -3,8 +3,8 @@
 #include <MFRC522.h>  // 引用程式庫
 #include <RH_RF95.h>
 
-#define SS_PIN 53  // SDA uno 10,mega 53
-#define RST_PIN 5  //  RST uno 9, mega 5
+#define SS_PIN 10  // SDA uno 10,mega 53
+#define RST_PIN 9  //  RST uno 9, mega 5
 //SCK 13,MOSI 11,MISO 12 (uno)
 //SCK 52,MOSI 51,MISO 50(Mega)
 char *reference;
@@ -21,8 +21,8 @@ Card cards[] = {
 
 int cardCounts[MAX_CARDS] = { 0 };
 
-const byte RX = 2; //LoRa TX 
-const byte TX = 3; //LoRa RX 
+const byte RX = 2; //LoRa TX (yellow)
+const byte TX = 3; //LoRa RX (white)
 SoftwareSerial Lora(2,3);
 RH_RF95<SoftwareSerial> rf95(Lora);
 
@@ -58,28 +58,28 @@ void loop() {
         Serial.println(cards[i].cardNames);        //輸出對應卡號名稱
 
         //LoRa 送出 
-        // char cardName[5];
-        // strcpy(cardName, cards[i].cardNames.c_str());
-        // rf95.send((uint8_t*)cardName, strlen(cardName));
-        // rf95.waitPacketSent();
+        char cardName[RH_RF95_MAX_MESSAGE_LEN];
+        strcpy(cardName, cards[i].cardNames.c_str());
+        rf95.send((uint8_t*)cardName, strlen(cardName));
+        rf95.waitPacketSent();
 
-        // // 等待回覆
-        // uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-        // uint8_t len = sizeof(buf);
-        // if (rf95.waitAvailableTimeout(3000)) {
-        //   if (rf95.recv(buf, &len)) {     //接收回覆
-        //     Serial.print("got reply: ");
-        //     Serial.println((char*)buf);
-        //   } 
-        //   else {
-        //     Serial.println("recv failed");
-        //   }
-        // } 
-        // else {
-        //   Serial.println("No reply, is rf95_server running?");
-        // }
-        // delay(1000);
-        // Serial.print(": ");
+        // 等待回覆
+        uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
+        uint8_t len = sizeof(buf);
+        if (rf95.waitAvailableTimeout(3000)) {
+          if (rf95.recv(buf, &len)) {     //接收回覆
+            Serial.print("got reply: ");
+            Serial.println((char*)buf);
+          } 
+          else {
+            Serial.println("recv failed");
+          }
+        } 
+        else {
+          Serial.println("No reply, is rf95_server running?");
+        }
+        delay(1000);
+        Serial.print(": ");
         cardCounts[i]++;                // 將對應的計數器加一
         Serial.println(cardCounts[i]);  //輸出卡號計數器
         found = true;                   //標記找到匹配卡號
