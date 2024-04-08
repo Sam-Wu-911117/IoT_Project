@@ -3,10 +3,10 @@
 #include <MFRC522.h>  // 引用程式庫
 #include <RH_RF95.h>
 
-#define SS_PIN 10  // SDA uno 10,mega 53
-#define RST_PIN 9  //  RST uno 9, mega 5
+#define SS_PIN 53  // SDA uno 10,mega 53 
+#define RST_PIN 5  //  RST uno 9, mega 5
 //SCK 13,MOSI 11,MISO 12 (uno)
-//SCK 52,MOSI 51,MISO 50(Mega)
+//SCK 52,MOSI 51,MISO 50 (Mega)
 char *reference;
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
 const int MAX_CARDS = 4;  // 最大不同卡號數量
@@ -21,9 +21,9 @@ Card cards[] = {
 
 int cardCounts[MAX_CARDS] = { 0 };
 
-const byte RX = 2; //LoRa TX (yellow)
-const byte TX = 3; //LoRa RX (white)
-SoftwareSerial Lora(2,3);
+const byte RX = 12; 
+const byte TX = 13; 
+SoftwareSerial Lora(RX,TX);//LoRa TX (yellow),RX (white)
 RH_RF95<SoftwareSerial> rf95(Lora);
 
 void setup() {

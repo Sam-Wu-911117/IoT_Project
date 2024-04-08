@@ -14,10 +14,12 @@ void rfidRead() {
     for (int i = 0; i < MAX_CARDS; i++) {  // 檢查卡號是否已存在於陣列中
       if (cardID == cardIDs[i]) {          //如果找到匹配的卡號
         Serial.print(cardNames[i]);        //輸出對應卡號名稱
-        if (Ser.available()) {
-          Ser.print(String(cardNames[i]));
-          delay(1000);
-        }
+        //LoRa 送出 
+        char cardName[RH_RF95_MAX_MESSAGE_LEN];
+        strcpy(cardName, cards[i].cardNames.c_str());
+        rf95.send((uint8_t*)cardName, strlen(cardName));
+        rf95.waitPacketSent();
+        
         Serial.print(": ");
         cardCounts[i]++;                // 將對應的計數器加一
         Serial.println(cardCounts[i]);  //輸出卡號計數器
@@ -26,4 +28,5 @@ void rfidRead() {
       }
     }
   }
+  mfrc522.PICC_HaltA();  // 停止讀卡器
 }
