@@ -78,21 +78,21 @@ void loop() {
         rf95.send((uint8_t*)cardName, strlen(cardName));
         rf95.waitPacketSent();
 
-        // 等待回覆
-        uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-        uint8_t len = sizeof(buf);
-        if (rf95.waitAvailableTimeout(3000)) {
-          if (rf95.recv(buf, &len)) {     //接收回覆
-            Serial.print("got reply: ");
-            Serial.println((char*)buf);
-          } 
-          else {
-            Serial.println("recv failed");
-          }
-        } 
-        else {
-          Serial.println("No reply, is rf95_server running?");
-        }
+        // // 等待回覆
+        // uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
+        // uint8_t len = sizeof(buf);
+        // if (rf95.waitAvailableTimeout(3000)) {
+        //   if (rf95.recv(buf, &len)) {     //接收回覆
+        //     Serial.print("got reply: ");
+        //     Serial.println((char*)buf);
+        //   } 
+        //   else {
+        //     Serial.println("recv failed");
+        //   }
+        // } 
+        // else {
+        //   Serial.println("No reply, is rf95_server running?");
+        // }
         delay(1000);
         Serial.print(": ");
         cardCounts[i]++;                // 將對應的計數器加一
