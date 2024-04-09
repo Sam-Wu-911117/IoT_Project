@@ -120,10 +120,10 @@ void setup() {
   pinMode(txPin, OUTPUT);
            
   Serial.println("請放置卡片");  // 提示請放置卡片
-  while (!Ser) {}
+  while (!Serial1) {}
 
     if (!rf95.init()) {
-    ShowSerial.println("init failed");
+    Serial.println("init failed");
     while (1);
   }
   rf95.setFrequency(433.0);
