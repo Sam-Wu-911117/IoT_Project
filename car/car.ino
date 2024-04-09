@@ -47,16 +47,17 @@ const int sensor5 = 23;
 const byte speed = 80;
 const byte turn_speed = 60;
 //超音波
-const byte trigPin1 = 24;  // 右邊超音波 觸發腳 Trig
-const byte echoPin1 = 25;  // 右邊超音波 接收腳 Echo
-int distance1;             // 距離 cm
-
-const byte trigPin2 = 26;  // 左邊超音波 觸發腳 Trig
-const byte echoPin2 = 27;  // 左邊超音波 接收腳 Echo
-int distance2;             // 距離 cm
-
-const byte trigPin3 = 28;  // 左邊超音波 觸發腳 Trig
-const byte echoPin3 = 29;  // 左邊超音波 接收腳 Echo
+// Left
+const byte trigPin1 = 24;  
+const byte echoPin1 = 25;  
+int distance1;             
+// Right
+const byte trigPin2 = 26;  
+const byte echoPin2 = 27;  
+int distance2;             
+// Back
+const byte trigPin3 = 28;  
+const byte echoPin3 = 29;  
 int distance3;    
 
 unsigned long ping1() {
