@@ -33,7 +33,7 @@ Card cards[] = {
 int cardCounts[MAX_CARDS] = { 0 };
 
 const int in1 = 4;   // 控制馬達1正轉
-const int in2 = 5;   // 控制馬達1反轉
+const int in2 = 14;   // 控制馬達1反轉
 const int in3 = 6;   // 控制馬達2正轉
 const int in4 = 7;   // 控制馬達2反轉
 const int enA = 10;  // 控制PWM
