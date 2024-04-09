@@ -88,8 +88,8 @@ unsigned long ping3() {
 
 void setup() {
 
-  Serial.begin(9600);
-  Ser.begin(9600); 
+  Serial.begin(115200);
+  Serial1.begin(115200); 
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
 
@@ -116,8 +116,8 @@ void setup() {
   pinMode(trigPin3, OUTPUT);
   pinMode(echoPin3, INPUT);
   
-  pinMode(rxPin, INPUT);
-  pinMode(txPin, OUTPUT);
+  pinMode(RX, INPUT);
+  pinMode(TX, OUTPUT);
            
   Serial.println("請放置卡片");  // 提示請放置卡片
   while (!Serial1) {}

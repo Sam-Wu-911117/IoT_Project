@@ -12,8 +12,8 @@ void rfidRead() {
 
     bool found = false;
     for (int i = 0; i < MAX_CARDS; i++) {  // 檢查卡號是否已存在於陣列中
-      if (cardID == cardIDs[i]) {          //如果找到匹配的卡號
-        Serial.print(cardNames[i]);        //輸出對應卡號名稱
+      if (cardID == cards[i].cardIDs) {          //如果找到匹配的卡號
+        Serial.print(cards[i].cardNames);        //輸出對應卡號名稱
         //LoRa 送出 
         char cardName[RH_RF95_MAX_MESSAGE_LEN];
         strcpy(cardName, cards[i].cardNames.c_str());
