@@ -44,7 +44,7 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
-const byte speed = 60;
+const byte speed = 90;
 const byte turn_speed = 60;
 //超音波
 // Left
