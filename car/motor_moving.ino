@@ -37,6 +37,24 @@ void TurnRight() {
   Serial.println("right");
 }
 
+//大左轉
+void BigTurnLeft() {
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(enA, 0);
+  analogWrite(enB, turn_speed);
+  Serial.println("left");
+}
+
+//右轉
+void BigTurnRight() {
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  analogWrite(enA, turn_speed);
+  analogWrite(enB, 0);
+  Serial.println("right");
+}
+
 //停止
 void Stop() {
   analogWrite(enA, 0);
