@@ -38,6 +38,11 @@ const int in3 = 6;   // 控制馬達2正轉
 const int in4 = 7;   // 控制馬達2反轉
 const int enA = 10;  // 控制PWM
 const int enB = 11;
+
+// 馬達初始速度和最低可運行速度
+const byte initial_speed = 150;  // 初始速度
+const byte min_speed = 80;      // 最低可運行速度
+
 //循跡傳感器
 const int sensor1 = 3;  
 const int sensor2 = 8;
@@ -137,50 +142,13 @@ void loop() {
   ulDistance();
 }
 
-//小左轉
-void STurnLeft() {
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-  analogWrite(enA, 0);
-  analogWrite(enB, turn_speed);
-  Serial.println("Sleft");
-  delay(1000);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, LOW);
-}
 
-//小右轉
-void STurnRight() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  analogWrite(enA, turn_speed);
-  analogWrite(enB, 0);
-  Serial.println("Sright");
-  delay(1000);
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, LOW);
-}
-
-//回小左轉
-void BSTurnLeft() {
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-  analogWrite(enA, 0);
-  analogWrite(enB, turn_speed);
-  Serial.println("BSleft");
-  delay(1000);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-}
-
-//回小右轉
-void BSTurnRight() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  analogWrite(enA, turn_speed);
-  analogWrite(enB, 0);
-  Serial.println("BSright");
-  delay(1000);
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
+void decreaseSpeed() {
+  static int current_speed = initial_speed;
+  if (current_speed > min_speed) {
+    current_speed = min_speed;
+    analogWrite(enA, current_speed);
+    analogWrite(enB, current_speed);
+    delay(100); // 延遲一段時間以降低速度變化的速度
+  }
 }
