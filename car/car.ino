@@ -33,7 +33,7 @@ Card cards[] = {
 int cardCounts[MAX_CARDS] = { 0 };
 
 const int in1 = 4;   // 控制馬達1正轉
-const int in2 = 14;   // 控制馬達1反轉
+const int in2 = 14;  // 控制馬達1反轉
 const int in3 = 6;   // 控制馬達2正轉
 const int in4 = 7;   // 控制馬達2反轉
 const int enA = 10;  // 控制PWM
@@ -44,8 +44,9 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
-const byte speed = 120;
-const byte turn_speed = 120;
+const byte speed = 100;
+const byte turn_speed = 220;
+const byte turn_speed_n = 190 ;
 //超音波
 // Left
 const byte trigPin1 = 24;  
