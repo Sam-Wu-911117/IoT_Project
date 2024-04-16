@@ -39,9 +39,23 @@ const int in4 = 7;   // 控制馬達2反轉
 const int enA = 10;  // 控制PWM
 const int enB = 11;
 
-// 馬達初始速度和最低可運行速度
-const byte initial_speed = 150;  // 初始速度
-const byte min_speed = 80;      // 最低可運行速度
+// 馬達初始轉速和固定轉速
+const int initial_speed = 130;  // 初始轉速 (0-255)
+const int fixed_speed = 90;  // 第一個固定轉速 (0-255)
+
+int speed;
+//const byte speed = 130;
+const int turn_speed = 230;
+const int turn_speed_n = 190 ;
+
+// 開始執行第一個固定轉速的時間
+unsigned long initial_speed_start_time = 0;
+// 第一個固定轉速持續時間（毫秒）
+const unsigned long initial_speed_duration = 500;
+
+unsigned long last_stop_time = 0;
+
+bool vehicle_stopped = false;
 
 //循跡傳感器
 const int sensor1 = 3;  
@@ -49,9 +63,7 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
-const byte speed = 130;
-const byte turn_speed = 230;
-const byte turn_speed_n = 190 ;
+
 //超音波
 // Left
 const byte trigPin1 = 24;  
@@ -107,6 +119,10 @@ void setup() {
   pinMode(enA, OUTPUT);
   pinMode(enB, OUTPUT);
 
+   // 設置馬達初始轉速
+  analogWrite(enA, initial_speed);
+  analogWrite(enB, initial_speed);
+
   pinMode(sensor1, INPUT);
   pinMode(sensor2, INPUT);
   pinMode(sensor3, INPUT);
@@ -142,13 +158,22 @@ void loop() {
   ulDistance();
 }
 
+void startVehicle() {
+  startInitialSpeedTimer(); // 重新启动计时器
+  last_stop_time = millis();
+  // 启动车辆并设置为初始速度
+  analogWrite(enA, initial_speed);
+  analogWrite(enB, initial_speed);
+  vehicle_stopped = false;
+}
 
-void decreaseSpeed() {
-  static int current_speed = initial_speed;
-  if (current_speed > min_speed) {
-    current_speed = min_speed;
-    analogWrite(enA, current_speed);
-    analogWrite(enB, current_speed);
-    delay(100); // 延遲一段時間以降低速度變化的速度
-  }
+void setInitialSpeed(int speed) {
+  // 設置固定轉速
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+}
+
+void startInitialSpeedTimer() {
+  // 開始計時器，用於計算第一個固定速度的執行時間
+  initial_speed_start_time = millis();
 }

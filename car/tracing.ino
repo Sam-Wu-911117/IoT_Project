@@ -16,6 +16,22 @@ void tracing() {
   Serial.print("senor5= ");
   Serial.println(data[4]);
 
+   // 檢查是否需要改變速度
+  if (millis() - initial_speed_start_time > initial_speed_duration) {
+    // 已經過了一段時間，改變馬達速度
+    setInitialSpeed(fixed_speed);
+  }
+  // 检查车辆是否停止
+  if (vehicle_stopped) {
+    // 如果停止了，检查是否需要重新启动
+    if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {
+      startVehicle();
+    }
+    else {
+      stop();
+    }
+  }
+
   char n=' ';
   
   if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  //只有中間測到黑線
@@ -33,9 +49,10 @@ void tracing() {
   // else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
   //   BigTurnRight();
   // }
+  
 
   else{
-    Stop();
+    stop();
   }
   switch (n){
     case  'A':

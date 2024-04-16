@@ -1,11 +1,12 @@
+
 //前進
 void Forward() {
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
-  analogWrite(enA, speed);
-  analogWrite(enB, speed);
+//  analogWrite(enA, fixed_speed);
+//  analogWrite(enB, fixed_speed);
   Serial.println("forward");
 }
 
@@ -60,8 +61,14 @@ void TurnRight() {
 // }
 
 //停止
-void Stop() {
-  analogWrite(enA, 0);
-  analogWrite(enB, 0);
+void stop() {
+  // 停止車輛並將速度設置為零
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
   Serial.println("stop");
+  setInitialSpeed(0); // 將速度設置為零
+  //startInitialSpeedTimer(); // 重新啟動計時器以準備下一次起步
+  vehicle_stopped = true;
 }
