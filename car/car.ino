@@ -83,3 +83,51 @@ void Stop() {
   analogWrite(enB, 0);
   Serial.println("stop");
 }
+
+//小左轉
+void STurnLeft() {
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(enA, 0);
+  analogWrite(enB, turn_speed);
+  Serial.println("Sleft");
+  delay(1000);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+}
+
+//小右轉
+void STurnRight() {
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  analogWrite(enA, turn_speed);
+  analogWrite(enB, 0);
+  Serial.println("Sright");
+  delay(1000);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+}
+
+//回小左轉
+void BSTurnLeft() {
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(enA, 0);
+  analogWrite(enB, turn_speed);
+  Serial.println("BSleft");
+  delay(1000);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+//回小右轉
+void BSTurnRight() {
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  analogWrite(enA, turn_speed);
+  analogWrite(enB, 0);
+  Serial.println("BSright");
+  delay(1000);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+}
