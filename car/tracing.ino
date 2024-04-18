@@ -32,7 +32,7 @@ void tracing() {
     }
   }
 
-  char n=' ';
+
   
   if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  //只有中間測到黑線
     Forward();
@@ -43,47 +43,48 @@ void tracing() {
   else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
     TurnRight();
   }
-  // else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1) {  //左邊檢測到黑線
-  //   BigTurnLeft();
-  // }
-  // else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-  //   BigTurnRight();
-  // }
-  
-
+   else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
+     BigTurnLeft();
+   }
+   else if (data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
+     BigTurnRight();
+   }
   else{
     stop();
   }
-  switch (n){
-    case  'A':
-      tracing();
-      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-        TurnRight();
-      }
-      break;
-    case  'B':
-      tracing();
-      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
-        TurnRight();
-      }
-      else if (data[0]==0 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-        TurnRight();
-      }
-      break;
-    case  'C':
-      tracing();
-      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
-        TurnRight();
-      }
-      else if (data[0]==0 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-        TurnLeft();
-      }
-      break;
-    case  'D':
-      tracing();
-      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-        TurnLeft();
-      }
-      break;
-  }
+
+
+  
+//  switch (n){
+//    case  'A':
+//      tracing();
+//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
+//        TurnRight();
+//      }
+//      break;
+//    case  'B':
+//      tracing();
+//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
+//        TurnRight();
+//      }
+//      else if (data[0]==0 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
+//        TurnRight();
+//      }
+//      break;
+//    case  'C':
+//      tracing();
+//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
+//        TurnRight();
+//      }
+//      else if (data[0]==0 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
+//        TurnLeft();
+//      }
+//      break;
+//    case  'D':
+//      tracing();
+//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
+//        TurnLeft();
+//      }
+//      break;
+//  }
 }
