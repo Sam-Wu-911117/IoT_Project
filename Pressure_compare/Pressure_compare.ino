@@ -1,4 +1,4 @@
-const int PressurePin[4] = {A0, A1,A2,A3};
+const int PressurePin[4] = {A0,A1,A2,A3};
 const int numSensors = 4;
 int sensorValues[numSensors]; 
 
@@ -10,6 +10,8 @@ void setup() {
   Serial.begin(9600);
   pinMode(PressurePin[0],INPUT);
   pinMode(PressurePin[1],INPUT);
+  pinMode(PressurePin[2],INPUT);
+  pinMode(PressurePin[3],INPUT);
 }
 
 void loop() {
