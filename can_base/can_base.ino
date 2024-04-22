@@ -12,9 +12,24 @@ const byte TX = 3; //LoRa RX (white)
 SoftwareSerial COMSerial(RX,TX);  
 RH_RF95<SoftwareSerial> rf95(COMSerial);
 
+const int PressurePin[4] = {A0,A1,A2,A3};
+const int numSensors = 4;
+int sensorValues[numSensors]; 
+
+// 定義壓力感測器的量程 (0.1kg ~ 10kg)
+const float minPressure = 0.1; // 最小壓力（kg）
+const float maxPressure = 10.0; // 最大壓力（kg）
+
+
+
 void setup() {
   Serial.begin(115200);
   Ser.begin(115200);
+
+  pinMode(PressurePin[0],INPUT);
+  pinMode(PressurePin[1],INPUT);
+  pinMode(PressurePin[2],INPUT);
+  pinMode(PressurePin[3],INPUT);
   //rpi
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
@@ -39,5 +54,6 @@ void loop() {
       delay(1000);
     } 
   }
+  pressure();
   delay(1000);
 }
