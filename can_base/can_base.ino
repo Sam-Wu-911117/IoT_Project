@@ -20,8 +20,6 @@ int sensorValues[numSensors];
 const float minPressure = 0.1; // 最小壓力（kg）
 const float maxPressure = 10.0; // 最大壓力（kg）
 
-
-
 void setup() {
   Serial.begin(115200);
   Ser.begin(115200);
@@ -34,15 +32,16 @@ void setup() {
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
   //Serial.println("RF95 server test."); 
-  if (!rf95.init()) {
-    Serial.println("init failed");
-    while (1);
-  }
+  // if (!rf95.init()) {
+  //   Serial.println("init failed");
+  //   while (1);
+  // }
   rf95.setFrequency(433.0);
   while (!Ser) {}
 }
 
 void loop() {
+  pressure();
   if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t buf[4];
@@ -54,6 +53,6 @@ void loop() {
       delay(1000);
     } 
   }
-  pressure();
+  
   delay(1000);
 }
