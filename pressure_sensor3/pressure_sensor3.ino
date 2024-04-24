@@ -12,6 +12,7 @@ void loop() {
   Serial.print("Pressure Percentage: ");
   Serial.print(percentage);
   Serial.println("%");
+  Serial.println(sensorValue);
 
   delay(500);
    if (percentage>1)  

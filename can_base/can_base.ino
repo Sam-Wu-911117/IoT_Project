@@ -17,8 +17,8 @@ const int numSensors = 4;
 int sensorValues[numSensors]; 
 
 // 定義壓力感測器的量程 (0.1kg ~ 10kg)
-const float minPressure = 0.1; // 最小壓力（kg）
-const float maxPressure = 10.0; // 最大壓力（kg）
+// const float minPressure = 0.1; // 最小壓力（kg）
+// const float maxPressure = 10.0; // 最大壓力（kg）
 
 void setup() {
   Serial.begin(115200);

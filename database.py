@@ -14,26 +14,24 @@ try:
         while ser.in_waiting >= 0:
             read = ser.read(1024).decode('utf-8').rstrip()
             
-            data = read.split(',')
-
-            
-            sensor_data = {}
-            for item in data:
-              try:
-                sensor, value = item.split(':')
-                sensor_data[sensor] = int(value)
-                firebase.put_async('/', 'number',{sensor, int(value)})
-              except:
-                      print(item,end="")
+            try:
+                data = read.split('\n')
+                sensor_data = {}
+                for item in data:
+                  sensor, value = item.split(':')
+                  sensor_data[sensor] = int(value)
+               
+            except ValueError:
+                   print(f"{item}")
+                   continue
             print(sensor_data,end="")
-            
-           
-#            firebase.put_async('/','number',{
-#                'can1':5,
-#                'can2':7,
-#                'can3':2,
-#                'can4':1,
-#                'now' :read
-#            })
+              
+            firebase.put_async('/','number',{
+                'can1':sensor_data['Pressure0'],
+                'can2':sensor_data['Pressure1'],
+                'can3':sensor_data['Pressure2'],
+                'can4':sensor_data['Pressure3'],
+            })
 except KeyboardInterrupt:
         print("Close Serial communication")
+
