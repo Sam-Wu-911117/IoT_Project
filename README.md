@@ -15,4 +15,11 @@
         ![alt text](image-4.png)
     - ### 壓力感測器測試
         ![alt text](image-5.png) ![alt text](image-6.png)
+  - [2024/4/8~2024/4/12(week6)](##2024/4/8~2024/4/12(week7))
+    - ### 車體製作
+      - ### 車體製作完成
+        ![alt text](image-7.png)
+      - ### RFID 資訊透過LoRa傳送到資料庫
+        ![alt text](image-8.png) ![alt text](image-9.png)
+
 
