@@ -5,13 +5,13 @@ void ulDistance() {
 
   Serial.print("Distance1: ");  // 輸出距離到串口
   Serial.print(distance1);
-  Serial.println(" cm");
+  Serial.print(" cm ");
   Serial.print("Distance2: ");
   Serial.print(distance2);
-  Serial.println(" cm");
+  Serial.print(" cm ");
   Serial.print("Distance3: ");
   Serial.print(distance3);
-  Serial.println(" cm");
+  Serial.println(" cm ");
 
   delay(1000);  // 延遲1000毫秒再次測量距離
 }

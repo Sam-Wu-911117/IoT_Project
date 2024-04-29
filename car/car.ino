@@ -28,7 +28,7 @@ struct Card {
   String cardNames;
 };
 Card cards[] = {
-  { "E0DD9218" ,"num1" },{ "CC6F3BD5" ,"num2" },{ "8054E119" ,"num3" },{ "E0EAA718" ,"num4" }
+  { "E0DD9218" ,"111" },{ "CC6F3BD5" ,"222" },{ "8054E119" ,"333" },{ "E0EAA718" ,"444" }
 };
 int cardCounts[MAX_CARDS] = { 0 };
 
@@ -105,12 +105,12 @@ unsigned long ping3() {
 // can 4 => c
 
 void setup() {
-
   Serial.begin(115200);
   Serial1.begin(115200); 
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
-
+  Serial.println("請放置卡片");  // 提示請放置卡片
+  
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
   pinMode(in3, OUTPUT);
@@ -119,7 +119,7 @@ void setup() {
   pinMode(enA, OUTPUT);
   pinMode(enB, OUTPUT);
 
-   // 設置馬達初始轉速
+  // 設置馬達初始轉速
   analogWrite(enA, initial_speed);
   analogWrite(enB, initial_speed);
 
@@ -140,16 +140,13 @@ void setup() {
   
   pinMode(RX, INPUT);
   pinMode(TX, OUTPUT);
-           
-  Serial.println("請放置卡片");  // 提示請放置卡片
+  
   while (!Serial1) {}
-
-    if (!rf95.init()) {
+  if (!rf95.init()) {
     Serial.println("init failed");
     while (1);
   }
   rf95.setFrequency(433.0);
-
 }
 
 void loop() {
@@ -158,22 +155,4 @@ void loop() {
   ulDistance();
 }
 
-void startVehicle() {
-  startInitialSpeedTimer(); // 重新启动计时器
-  last_stop_time = millis();
-  // 启动车辆并设置为初始速度
-  analogWrite(enA, initial_speed);
-  analogWrite(enB, initial_speed);
-  vehicle_stopped = false;
-}
 
-void setInitialSpeed(int speed) {
-  // 設置固定轉速
-  analogWrite(enA, speed);
-  analogWrite(enB, speed);
-}
-
-void startInitialSpeedTimer() {
-  // 開始計時器，用於計算第一個固定速度的執行時間
-  initial_speed_start_time = millis();
-}

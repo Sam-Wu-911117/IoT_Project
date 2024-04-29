@@ -16,12 +16,13 @@ void rfidRead() {
         Serial.print(cards[i].cardNames);        //輸出對應卡號名稱
         //LoRa 送出 
         char cardName[RH_RF95_MAX_MESSAGE_LEN];
-        strcpy(cardName, cards[i].cardNames.c_str());
+        String s1="NowAt4";
+        strcpy(cardName, s1.concat(cards[i].cardNames.c_str()));
         rf95.send((uint8_t*)cardName, strlen(cardName));
         rf95.waitPacketSent();
         
         Serial.print(": ");
-        cardCounts[i]++;                // 將對應的計數器加一
+        cardCounts[i]++;                //將對應的計數器加一
         Serial.println(cardCounts[i]);  //輸出卡號計數器
         found = true;                   //標記找到匹配卡號
         break;

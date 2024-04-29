@@ -4,7 +4,7 @@ void pressure(){
     sensorValues[i] = analogRead(PressurePin[i]);
     weight=(sensorValues[i]/1023)*9.9;
     //float percentage = map(sensorValues[i], 0, 1023, 0, 100);
-    if(weight>=0.1 && weight<=0.15){
+    //if(weight>=0.1 && weight<=0.15){
       percentage=198*weight;
       Serial.print("Pressure ");
       Serial.print(i);
@@ -29,11 +29,10 @@ void pressure(){
       else if(sensorValues[3]>sensorValues[0]  && sensorValues[3]>sensorValues[1] && sensorValues[3]>sensorValues[2]){
         Serial.println("maxpin : A3");
       }
-    }
-    else{
-    Serial.println("Pressure out of range!");
-    }
-     
+    //}
+    // else{
+    // Serial.println("Pressure out of range!");
+    // }
   }
   delay(1000);
 }
