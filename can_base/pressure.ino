@@ -2,8 +2,10 @@ void pressure(){
 
   for (int i = 0; i < numSensors; i++) {
     sensorValues[i] = analogRead(PressurePin[i]);
-    float percentage = map(sensorValues[i], 0, 1023, 0, 100);
-    
+    weight=(sensorValues[i]/1023)*9.9;
+    //float percentage = map(sensorValues[i], 0, 1023, 0, 100);
+    if(weight>=0.1 && weight<=0.15){
+      percentage=198*weight;
       Serial.print("Pressure ");
       Serial.print(i);
       Serial.print(" Percentage: ");
@@ -28,5 +30,10 @@ void pressure(){
         Serial.println("maxpin : A3");
       }
     }
+    else{
+    Serial.println("Pressure out of range!");
+    }
+     
+  }
   delay(1000);
 }
