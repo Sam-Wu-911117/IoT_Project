@@ -15,12 +15,12 @@ RH_RF95<SoftwareSerial> rf95(COMSerial);
 const int PressurePin[4] = {A0,A1,A2,A3};
 const int numSensors = 4;
 int sensorValues[numSensors]; 
-float weight;
-float percentage;
+float weight[numSensors];
+float percentage[numSensors];
 // 定義壓力感測器的量程 (0.1kg ~ 10kg)
 // const float minPressure = 0.1; // 最小壓力（kg）
 // const float maxPressure = 10.0; // 最大壓力（kg）
-
+String rfid;
 void setup() {
   Serial.begin(115200);
   Ser.begin(115200);
@@ -33,27 +33,27 @@ void setup() {
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
   //Serial.println("RF95 server test."); 
-  // if (!rf95.init()) {
-  //   Serial.println("init failed");
-  //   while (1);
-  // }
+  if (!rf95.init()) {
+    Serial.println("init failed");
+    while (1);
+  }
   rf95.setFrequency(433.0);
   while (!Ser) {}
 }
 
 void loop() {
-  pressure();
   if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-    uint8_t buf[4];
+    uint8_t buf[1];
     uint8_t len = sizeof(buf);
     if (rf95.recv(buf, &len)) {
       //Serial.print("got request: ");
+      Serial.print("NowAt:");
       Serial.println((char*)buf);
-      Ser.print(String((char*)buf));
+      rfid = (char*)buf;
       delay(1000);
     } 
   }
-  
+  pressure(rfid);
   delay(1000);
 }

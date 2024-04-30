@@ -28,7 +28,7 @@ struct Card {
   String cardNames;
 };
 Card cards[] = {
-  { "E0DD9218" ,"111" },{ "CC6F3BD5" ,"222" },{ "8054E119" ,"333" },{ "E0EAA718" ,"444" }
+  { "E0DD9218" ,"1" },{ "CC6F3BD5" ,"2" },{ "8054E119" ,"3" },{ "E0EAA718" ,"4" }
 };
 int cardCounts[MAX_CARDS] = { 0 };
 
