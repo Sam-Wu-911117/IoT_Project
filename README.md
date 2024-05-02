@@ -18,14 +18,16 @@
         3. ##### 超音波感測器擺放位置測試
         ![alt text](image-4.png)
     - #### 壓力感測器測試
-        ![alt text](image-5.png)||![alt text](image-6.png)
+      <center class="half">
+      <img src="image-5.png" width="200"/><img src="image-6.png" width="200"/>
+      </center> 
   - ### 2024/4/8~2024/4/12(week7)
     - #### 車體製作
       - ##### 車體製作完成
         ![alt text](image-7.png)
     - #### RFID 資訊透過LoRa傳送到資料庫
-     <center class="half">
-     <img src="image-8.png" width="200"/><img src="image-9.png" width="200"/>
-     </center>
+      <center class="half">
+      <img src="image-8.png" width="200"/><img src="image-9.png" width="200"/>
+      </center>
 
 
