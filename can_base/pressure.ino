@@ -18,25 +18,22 @@ void pressure(String rfid){
   percentage[2]=198*weight[2];
   percentage[3]=198*weight[3];
 
-  // Serial.print("Pressure0 ");
-  // Serial.print(" Percentage: ");
-  // Serial.print(int(percentage[0]));
-  // Serial.print(" % ");
+  Serial.print(sensorValues[0]);
+  Serial.print(" Pressure0 ");
+  Serial.print(int(percentage[0]));
+  Serial.print(" % ");
 
-  // Serial.print(" Pressure1 ");
-  // Serial.print(" Percentage: ");
-  // Serial.print(int(percentage[1]));
-  // Serial.print(" % ");
+  Serial.print(" Pressure1 ");
+  Serial.print(int(percentage[1]));
+  Serial.print(" % ");
 
-  // Serial.print(" Pressure2 ");
-  // Serial.print(" Percentage: ");
-  // Serial.print(int(percentage[2]));
-  // Serial.print(" % ");
+  Serial.print(" Pressure2 ");
+  Serial.print(int(percentage[2]));
+  Serial.print(" % ");
 
-  // Serial.print(" Pressure3 ");
-  // Serial.print(" Percentage: ");
-  // Serial.print(int(percentage[3]));
-  // Serial.print(" % ");
+  Serial.print(" Pressure3 ");
+  Serial.print(int(percentage[3]));
+  Serial.print(" % ");
 
   Ser.print("Pressure0");
   Ser.print(":");

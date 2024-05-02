@@ -33,10 +33,10 @@ void setup() {
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
   //Serial.println("RF95 server test."); 
-  if (!rf95.init()) {
-    Serial.println("init failed");
-    while (1);
-  }
+  // if (!rf95.init()) {
+  //   Serial.println("init failed");
+  //   while (1);
+  // }
   rf95.setFrequency(433.0);
   while (!Ser) {}
 }
