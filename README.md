@@ -24,6 +24,8 @@
       - ##### 車體製作完成
         ![alt text](image-7.png)
     - #### RFID 資訊透過LoRa傳送到資料庫
-        ![alt text](image-8.png)||![alt text](image-9.png)
+     <center class="half">
+     <img src="image-8.png" width="200"/><img src="image-9.png" width="200"/>
+     </center>
 
 
