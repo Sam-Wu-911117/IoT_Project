@@ -20,7 +20,8 @@ float percentage[numSensors];
 // 定義壓力感測器的量程 (0.1kg ~ 10kg)
 // const float minPressure = 0.1; // 最小壓力（kg）
 // const float maxPressure = 10.0; // 最大壓力（kg）
-String rfid;
+String rfid,command;
+char cmd[2];
 void setup() {
   Serial.begin(115200);
   Ser.begin(115200);

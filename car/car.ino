@@ -44,7 +44,6 @@ const int initial_speed = 130;  // 初始轉速 (0-255)
 const int fixed_speed = 90;  // 第一個固定轉速 (0-255)
 
 int speed;
-//const byte speed = 130;
 const int turn_speed = 230;
 const int turn_speed_n = 190 ;
 
@@ -103,7 +102,7 @@ unsigned long ping3() {
 // can 2 => b => e
 // can 3 => b => e
 // can 4 => c
-
+String collect;
 void setup() {
   Serial.begin(115200);
   Serial1.begin(115200); 
@@ -150,9 +149,40 @@ void setup() {
 }
 
 void loop() {
-  tracing();
+    if(rf95.available()){
+    //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
+    uint8_t buf[2];
+    uint8_t len = sizeof(buf);
+    if (rf95.recv(buf, &len)) {
+      //Serial.print("got request: ");
+      //Serial.print("NowAt:");
+      Serial.println((char*)buf);
+      collect = (char*)buf;
+      delay(1000);
+    }
+  } 
+  tracing(collect);
   rfidRead();
   ulDistance();
 }
 
+void startVehicle() {
+  startInitialSpeedTimer(); // 重新启动计时器
+  last_stop_time = millis();
+  // 启动车辆并设置为初始速度
+  analogWrite(enA, initial_speed);
+  analogWrite(enB, initial_speed);
+  vehicle_stopped = false;
+}
+
+void setInitialSpeed(int speed) {
+  // 設置固定轉速
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+}
+
+void startInitialSpeedTimer() {
+  // 開始計時器，用於計算第一個固定速度的執行時間
+  initial_speed_start_time = millis();
+}
 

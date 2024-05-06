@@ -53,15 +53,22 @@ void pressure(String rfid){
 
   if(sensorValues[0]>sensorValues[1] && sensorValues[0]>sensorValues[2] && sensorValues[0]>sensorValues[3]){
     Serial.println("maxpin : A0");
+    command="A1";
   }
   else if(sensorValues[1]>sensorValues[0]  && sensorValues[1]>sensorValues[2] && sensorValues[1]>sensorValues[3]){
     Serial.println("maxpin : A1");
+    command="A2";
   }
   else if(sensorValues[2]>sensorValues[0]  && sensorValues[2]>sensorValues[1] && sensorValues[2]>sensorValues[3]){
     Serial.println("maxpin : A2");
+    command="B1";
   }
   else if(sensorValues[3]>sensorValues[0]  && sensorValues[3]>sensorValues[1] && sensorValues[3]>sensorValues[2]){
     Serial.println("maxpin : A3");
+    command="B2";
   }
+  strcpy(cmd,command.c_str());
+  rf95.send((uint8_t*)cmd,strlen(cmd));
+  rf95.waitPacketSent();
   delay(1000);
 }
