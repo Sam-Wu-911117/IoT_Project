@@ -23,6 +23,9 @@ void loop() {
     Serial.println(sensorValue);
 
   }
+  else if(weight==0){
+    Serial.println("0%");
+  }
   else{
     Serial.println("Pressure out of range!");
   }
