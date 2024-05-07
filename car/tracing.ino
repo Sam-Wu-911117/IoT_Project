@@ -13,7 +13,7 @@ void tracing(String collect) {
   Serial.print(data[2]);
   Serial.print(" senor4= ");
   Serial.print(data[3]);
-  Serial.print("senor5= ");
+  Serial.print(" senor5= ");
   Serial.println(data[4]);
 
    // 檢查是否需要改變速度
@@ -35,23 +35,23 @@ void tracing(String collect) {
 
   
   if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  //只有中間測到黑線
-    Serial.println("Forward");
+    //Serial.println("Forward");
     Forward();
   }
    else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1){  //左邊檢測到黑線
-    Serial.println("TurnLeft");
+    //Serial.println("TurnLeft");
     TurnLeft();
   }
   else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-    Serial.println("TurnRight");
+    //Serial.println("TurnRight");
     TurnRight();
   }
    else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
-    Serial.println("BigTurnLeft");
+    //Serial.println("BigTurnLeft");
     BigTurnLeft();
    }
    else if (data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-    Serial.println("BigTurnRight"); 
+    //Serial.println("BigTurnRight"); 
     BigTurnRight();
    }
   else{
