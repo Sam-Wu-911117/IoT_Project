@@ -1,4 +1,4 @@
-void tracing() {
+void tracing(String collect) {
   int data[5];
   data[0] = digitalRead(sensor1);  //讀取個傳感器值
   data[1] = digitalRead(sensor2);
@@ -35,19 +35,24 @@ void tracing() {
 
   
   if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  //只有中間測到黑線
+    Serial.println("Forward");
     Forward();
   }
    else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1){  //左邊檢測到黑線
+    Serial.println("TurnLeft");
     TurnLeft();
   }
   else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
+    Serial.println("TurnRight");
     TurnRight();
   }
    else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
-     BigTurnLeft();
+    Serial.println("BigTurnLeft");
+    BigTurnLeft();
    }
-   else if (data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-     BigTurnRight();
+   else if (data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
+    Serial.println("BigTurnRight"); 
+    BigTurnRight();
    }
   else{
     stop();
@@ -55,14 +60,14 @@ void tracing() {
 
 
   
-//  switch (n){
-//    case  'A':
+//  switch (collect){
+//    case  "A1":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
 //        TurnRight();
 //      }
 //      break;
-//    case  'B':
+//    case "A2":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
 //        TurnRight();
@@ -71,7 +76,7 @@ void tracing() {
 //        TurnRight();
 //      }
 //      break;
-//    case  'C':
+//    case  "B1":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
 //        TurnRight();
@@ -80,7 +85,7 @@ void tracing() {
 //        TurnLeft();
 //      }
 //      break;
-//    case  'D':
+//    case  "B2":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
 //        TurnLeft();

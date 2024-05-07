@@ -16,8 +16,9 @@ void rfidRead() {
         Serial.print(cards[i].cardNames);        //輸出對應卡號名稱
         //LoRa 送出 
         char cardName[RH_RF95_MAX_MESSAGE_LEN];
-        String s1="NowAt4";
-        strcpy(cardName, s1.concat(cards[i].cardNames.c_str()));
+        String str="";
+        str+=cards[i].cardNames.c_str();
+        strcpy(cardName, str.c_str());
         rf95.send((uint8_t*)cardName, strlen(cardName));
         rf95.waitPacketSent();
         
@@ -28,6 +29,12 @@ void rfidRead() {
         break;
       }
     }
+  }
+  else{
+    char s1[RH_RF95_MAX_MESSAGE_LEN];
+    String s2="0";
+    strcpy(s1,s2.c_str());
+    rf95.send((uint8_t*)s1, strlen(s1));
   }
   mfrc522.PICC_HaltA();  // 停止讀卡器
 }
