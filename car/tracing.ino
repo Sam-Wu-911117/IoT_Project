@@ -50,7 +50,7 @@ void tracing(String collect) {
     Serial.println("BigTurnLeft");
     BigTurnLeft();
    }
-   else if (data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
+   else if (data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
     Serial.println("BigTurnRight"); 
     BigTurnRight();
    }
