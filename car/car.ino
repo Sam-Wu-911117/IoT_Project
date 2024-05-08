@@ -40,8 +40,8 @@ const int enA = 10;  // 控制PWM
 const int enB = 11;
 
 // 馬達初始轉速和固定轉速
-const int initial_speed = 120;  // 初始轉速 (0-255)
-const int fixed_speed = 100;  // 第一個固定轉速 (0-255)
+const int initial_speed = 100;  // 初始轉速 (0-255)
+const int fixed_speed = 80;  // 第一個固定轉速 (0-255)
 
 int speed;
 const int turn_speed = 230;
