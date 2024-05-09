@@ -32,8 +32,6 @@ void tracing(String collect) {
     }
   }
 
-
-  
   if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  //只有中間測到黑線
     //Serial.println("Forward");
     Forward();
@@ -46,20 +44,27 @@ void tracing(String collect) {
     //Serial.println("TurnRight");
     TurnRight();
   }
-   else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
+  else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
     //Serial.println("BigTurnLeft");
     BigTurnLeft();
-   }
-   else if (data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
+  }
+  else if (data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
     //Serial.println("BigTurnRight"); 
     BigTurnRight();
-   }
+  }
+  else if(data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛左偏
+    SmallTurnRight();
+  }
+  else if(data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ //車輛右偏
+    SmallTurnLeft();
+  }
   else{
+
+    
     stop();
   }
 
 
-  
 //  switch (collect){
 //    case  "A1":
 //      tracing();
