@@ -52,15 +52,13 @@ void tracing(String collect) {
     //Serial.println("BigTurnRight"); 
     BigTurnRight();
   }
-  else if(data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛左偏
-    SmallTurnRight();
-  }
-  else if(data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ //車輛右偏
-    SmallTurnLeft();
-  }
+  // else if(data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛左偏
+  //   SmallTurnRight();
+  // }
+  // else if(data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ //車輛右偏
+  //   SmallTurnLeft();
+  // }
   else{
-
-    
     stop();
   }
 
