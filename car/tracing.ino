@@ -36,7 +36,7 @@ void tracing(String collect) {
     //Serial.println("Forward");
     Forward();
   }
-   else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1){  //左邊檢測到黑線
+  else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1){  //左邊檢測到黑線
     //Serial.println("TurnLeft");
     TurnLeft();
   }
