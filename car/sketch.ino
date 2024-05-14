@@ -1,5 +1,3 @@
-
-
 //void findcan(){
 //  i=0;
 //  if(n.isupper=true){

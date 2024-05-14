@@ -5,8 +5,8 @@ void Forward() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
-//  analogWrite(enA, fixed_speed);
-//  analogWrite(enB, fixed_speed);
+  analogWrite(enA, fixed_speed);
+  analogWrite(enB, fixed_speed);
   Serial.println("forward");
 }
 
