@@ -62,6 +62,7 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
+int data[5];
 
 //超音波
 // Left
@@ -104,8 +105,6 @@ unsigned long ping3() {
 // can 4 => c
 String collect;
 
-
-int data[5];
 void setup() {
     
   Serial.begin(115200);
@@ -155,7 +154,7 @@ void setup() {
   TCCR1A = 0; // 設置 Timer1 控制寄存器A為0
   TCCR1B = (1<<WGM12); // 設置 Timer1 控制寄存器B，啟用CTC模式
   TCCR1B |=(1<<CS10)|(1<<CS11); // 設置 Timer1 的分頻係數為64
-  OCR1A = 199999; // 設置計時器的計數值，以實現800毫秒的時間間隔
+  OCR1A = 3125; // 設置計時器的計數值，以實現200毫秒的時間間隔
   TCNT1 = 0; // 將 Timer1 計數器清零
   TIMSK1 |=(1<<OCIE1A); // 啟用 Timer1 的比較匹配中斷
   sei(); // 啟用中斷
@@ -167,6 +166,7 @@ ISR(TIMER1_COMPA_vect){
 }
 
 void loop() {
+  
     if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t buf[2];
@@ -179,6 +179,7 @@ void loop() {
       delay(1000);
     }
   } 
+  tracing(collect);
   rfidRead();
   ulDistance();
 }

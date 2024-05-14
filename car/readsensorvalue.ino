@@ -1,5 +1,4 @@
 void readsensorvalue(){
-  
   data[0] = digitalRead(sensor1);  //讀取個傳感器值
   data[1] = digitalRead(sensor2);
   data[2] = digitalRead(sensor3);
@@ -15,5 +14,4 @@ void readsensorvalue(){
   Serial.print(data[3]);
   Serial.print(" senor5= ");
   Serial.println(data[4]);
-
 }
