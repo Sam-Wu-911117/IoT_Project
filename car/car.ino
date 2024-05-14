@@ -40,8 +40,8 @@ const int enA = 10;  // 控制PWM
 const int enB = 11;
 
 // 馬達初始轉速和固定轉速
-const int initial_speed = 100;  // 初始轉速 (0-255)
-const int fixed_speed = 80;  // 第一個固定轉速 (0-255)
+const int initial_speed = 120;  // 初始轉速 (0-255)
+const int fixed_speed = 90;  // 第一個固定轉速 (0-255)
 
 int speed;
 const int turn_speed = 230;
@@ -62,7 +62,7 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
-int data[5];
+
 
 //超音波
 // Left
@@ -105,6 +105,11 @@ unsigned long ping3() {
 // can 4 => c
 String collect;
 
+// ISR(TIMER1_COMPA_vect){
+//   readsensorvalue();
+//   //tracing(collect);
+// }
+
 void setup() {
     
   Serial.begin(115200);
@@ -112,6 +117,7 @@ void setup() {
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
   Serial.println("請放置卡片");  // 提示請放置卡片
+
 
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
@@ -142,31 +148,16 @@ void setup() {
   
   pinMode(RX, INPUT);
   pinMode(TX, OUTPUT);
-  
+
   while (!Serial1) {}
   if (!rf95.init()) {
     Serial.println("init failed");
     while (1);
   }
   rf95.setFrequency(433.0);
-
-  cli(); // 關閉中斷
-  TCCR1A = 0; // 設置 Timer1 控制寄存器A為0
-  TCCR1B = (1<<WGM12); // 設置 Timer1 控制寄存器B，啟用CTC模式
-  TCCR1B |=(1<<CS10)|(1<<CS11); // 設置 Timer1 的分頻係數為64
-  OCR1A = 3125; // 設置計時器的計數值，以實現200毫秒的時間間隔
-  TCNT1 = 0; // 將 Timer1 計數器清零
-  TIMSK1 |=(1<<OCIE1A); // 啟用 Timer1 的比較匹配中斷
-  sei(); // 啟用中斷
-
-}
-
-ISR(TIMER1_COMPA_vect){
-  readsensorvalue();
 }
 
 void loop() {
-  
     if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t buf[2];
@@ -179,6 +170,15 @@ void loop() {
       delay(1000);
     }
   } 
+
+  // cli(); // 關閉中斷
+  // TCCR1A = 0; // 設置 Timer1 控制寄存器A為0
+  // TCCR1B = (1<<WGM12); // 設置 Timer1 控制寄存器B，啟用CTC模式
+  // TCCR1B |=(1<<CS10)|(1<<CS11); // 設置 Timer1 的分頻係數為64
+  // OCR1A = 499999; // 設置計時器的計數值，以實現800毫秒的時間間隔
+  // TCNT1 = 0; // 將 Timer1 計數器清零
+  // TIMSK1 |=(1<<OCIE1A); // 啟用 Timer1 的比較匹配中斷
+  // sei(); // 啟用中斷
   tracing(collect);
   rfidRead();
   ulDistance();

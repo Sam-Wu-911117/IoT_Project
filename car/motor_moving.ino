@@ -70,6 +70,8 @@ void stop() {
   digitalWrite(in2, LOW);
   digitalWrite(in3, LOW);
   digitalWrite(in4, LOW);
+  analogWrite(enA, 0);
+  analogWrite(enB, 0);
   Serial.println("stop");
   setInitialSpeed(0); // 將速度設置為零
   //startInitialSpeedTimer(); // 重新啟動計時器以準備下一次起步
@@ -104,4 +106,14 @@ void SmallTurnRight() {
   analogWrite(enB, 0);
   Serial.println("Small right");
   delay(1000);
+}
+
+void AdjustLeft() {
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(enA, 0);
+  analogWrite(enB, 200);
+  Serial.println("left");
 }

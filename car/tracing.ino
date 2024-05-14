@@ -1,22 +1,22 @@
 void tracing(String collect) {
-//  int data[5];
-//  data[0] = digitalRead(sensor1);  //讀取個傳感器值
-//  data[1] = digitalRead(sensor2);
-//  data[2] = digitalRead(sensor3);
-//  data[3] = digitalRead(sensor4);
-//  data[4] = digitalRead(sensor5);
-//  Serial.print("senor1= ");
-//  Serial.print(data[0]);
-//  Serial.print(" senor2= ");
-//  Serial.print(data[1]);
-//  Serial.print(" senor3= ");
-//  Serial.print(data[2]);
-//  Serial.print(" senor4= ");
-//  Serial.print(data[3]);
-//  Serial.print(" senor5= ");
-//  Serial.println(data[4]);
+  int data[5];
+  data[0] = digitalRead(sensor1);  //讀取個傳感器值
+  data[1] = digitalRead(sensor2);
+  data[2] = digitalRead(sensor3);
+  data[3] = digitalRead(sensor4);
+  data[4] = digitalRead(sensor5);
+  Serial.print("senor1= ");
+  Serial.print(data[0]);
+  Serial.print(" senor2= ");
+  Serial.print(data[1]);
+  Serial.print(" senor3= ");
+  Serial.print(data[2]);
+  Serial.print(" senor4= ");
+  Serial.print(data[3]);
+  Serial.print(" senor5= ");
+  Serial.println(data[4]);
 
-   // 檢查是否需要改變速度
+  // 檢查是否需要改變速度
   if (millis() - initial_speed_start_time > initial_speed_duration) {
     // 已經過了一段時間，改變馬達速度
     setInitialSpeed(fixed_speed);
@@ -55,9 +55,9 @@ void tracing(String collect) {
   // else if(data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛左偏
   //   SmallTurnRight();
   // }
-  // else if(data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ //車輛右偏
-  //   SmallTurnLeft();
-  // }
+  else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛右偏
+    AdjustLeft();
+  }
   else{
     stop();
   }
