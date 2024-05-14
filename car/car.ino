@@ -105,7 +105,7 @@ unsigned long ping3() {
 String collect;
 
 
-
+int data[5];
 void setup() {
     
   Serial.begin(115200);
@@ -163,8 +163,7 @@ void setup() {
 }
 
 ISR(TIMER1_COMPA_vect){
-
-  tracing(collect);
+  readsensorvalue();
 }
 
 void loop() {
@@ -203,4 +202,3 @@ void startInitialSpeedTimer() {
   // 開始計時器，用於計算第一個固定速度的執行時間
   initial_speed_start_time = millis();
 }
-
