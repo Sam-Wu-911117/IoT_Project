@@ -1,4 +1,5 @@
 void tracing(String collect) {
+  byteSensorStatus = 0;
   int data[5];
   data[0] = digitalRead(sensor1);  //讀取個傳感器值
   data[1] = digitalRead(sensor2);
@@ -36,29 +37,26 @@ void tracing(String collect) {
     Serial.println("Forward");
     Forward();
   }
-  else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1){  //左邊檢測到黑線
-    Serial.println("TurnLeft");
-    TurnLeft();
-  }
-  else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-    Serial.println("TurnRight");
-    TurnRight();
-  }
-  else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
-    Serial.println("BigTurnLeft");
-    BigTurnLeft();
-  }
-  else if (data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-    Serial.println("BigTurnRight"); 
-    BigTurnRight();
-  }
-  // else if(data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛左偏
-  //   SmallTurnRight();
-  // }
   else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ //車輛右偏
-    AdjustLeft();
+    AdjustLeft(180,180);
+    Serial.println("Adjustleft");
   }
-  else{
+  else if(data[0]==0 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
+    TurnLeft();
+    Serial.println("TurnLeft");
+  }
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ //車輛左偏
+    AdjustRight(180,180);
+    Serial.println("Adjustright");
+  }
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0){ 
+    TurnRight();
+    Serial.println("TurnRight");
+  }
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==1){
+    stop();
+  }
+  else if(data[0]==0 && data[1]==0 && data[2]==0 && data[3]==0 && data[4]==0){
     stop();
   }
 
