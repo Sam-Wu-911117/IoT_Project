@@ -21,7 +21,7 @@ RH_RF95<SoftwareSerial> rf95(Lora);
 //SCK 13,MOSI 11,MISO 12 (uno)
 //SCK 52,MOSI 51,MISO 50 (Mega)
 char *reference;
-MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
+MFRC522 mfrc522(SS_PIN, RST_PIN);  // 建立MFRC522物件
 #define MAX_CARDS 4  // 最大不同卡號數量
 struct Card {
   String cardIDs;
@@ -43,7 +43,7 @@ const int enB = 11;
 const int initial_speed = 120;  // 初始轉速 (0-255)
 const int fixed_speed = 90;  // 第一個固定轉速 (0-255)
 
-int speed;
+//轉彎速度
 const int turn_speed = 230;
 const int turn_speed_n = 190 ;
 
@@ -62,18 +62,17 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
-byte byteSensorStatus=0;
 
 //超音波
-// Left
+// 左邊
 const byte trigPin1 = 24;  
 const byte echoPin1 = 25;  
 int distance1;             
-// Right
+// 右邊
 const byte trigPin2 = 26;  
 const byte echoPin2 = 27;  
 int distance2;             
-// Back
+// 後方
 const byte trigPin3 = 28;  
 const byte echoPin3 = 29;  
 int distance3;    
@@ -171,9 +170,9 @@ void loop() {
 }
 
 void startVehicle() {
-  startInitialSpeedTimer(); // 重新启动计时器
+  startInitialSpeedTimer(); // 重新啟動計時器
   last_stop_time = millis();
-  // 启动车辆并设置为初始速度
+  // 啟動車輛並設置為初始速度
   analogWrite(enA, initial_speed);
   analogWrite(enB, initial_speed);
   vehicle_stopped = false;
