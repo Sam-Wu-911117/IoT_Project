@@ -1,9 +1,10 @@
 #include <SPI.h>
 #include <MFRC522.h>  // 引用程式庫
 
-#define SS_PIN 10  // 晶片選擇腳位
-#define RST_PIN 9  // 讀卡機的重製腳位
-
+#define SS_PIN 53  // 晶片選擇腳位 mega53 uno10
+#define RST_PIN 5  // 讀卡機的重製腳位 mega5 un9
+//SCK 13,MOSI 11,MISO 12 (uno)
+//SCK 52,MOSI 51,MISO 50 (Mega)
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
 
 #define MAX_CARDS 4  // 最大不同卡號數量

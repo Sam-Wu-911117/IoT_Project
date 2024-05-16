@@ -31,6 +31,7 @@ try:
                 'can2':sensor_data['Pressure1'],
                 'can3':sensor_data['Pressure2'],
                 'can4':sensor_data['Pressure3'],
+                'NowAt':sensor_data['NowAt']
             })
 except KeyboardInterrupt:
         print("Close Serial communication")

@@ -3,15 +3,15 @@ void ulDistance() {
   distance2 = ping2();
   distance3 = ping3();
 
-  Serial.print("Distance1: ");  // 輸出距離到串口
-  Serial.print(distance1);
-  Serial.println(" cm");
-  Serial.print("Distance2: ");
-  Serial.print(distance2);
-  Serial.println(" cm");
-  Serial.print("Distance3: ");
-  Serial.print(distance3);
-  Serial.println(" cm");
+  // Serial.print("Distance1: ");  // 輸出距離到串口
+  // Serial.print(distance1);
+  // Serial.print(" cm ");
+  // Serial.print("Distance2: ");
+  // Serial.print(distance2);
+  // Serial.print(" cm ");
+  // Serial.print("Distance3: ");
+  // Serial.print(distance3);
+  // Serial.println(" cm ");
 
   // 如果距離小於某個閾值，停止車子
   if (distance1 < 10 || distance2 < 10 || distance3 < 10) {

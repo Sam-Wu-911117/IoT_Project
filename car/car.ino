@@ -21,14 +21,14 @@ RH_RF95<SoftwareSerial> rf95(Lora);
 //SCK 13,MOSI 11,MISO 12 (uno)
 //SCK 52,MOSI 51,MISO 50 (Mega)
 char *reference;
-MFRC522 mfrc522(SS_PIN, RST_PIN);  // 創建MFRC522對象
+MFRC522 mfrc522(SS_PIN, RST_PIN);  // 建立MFRC522物件
 #define MAX_CARDS 4  // 最大不同卡號數量
 struct Card {
   String cardIDs;
   String cardNames;
 };
 Card cards[] = {
-  { "E0DD9218" ,"num1" },{ "CC6F3BD5" ,"num2" },{ "8054E119" ,"num3" },{ "E0EAA718" ,"num4" }
+  { "E0DD9218" ,"1" },{ "CC6F3BD5" ,"2" },{ "8054E119" ,"3" },{ "E0EAA718" ,"4" }
 };
 int cardCounts[MAX_CARDS] = { 0 };
 
@@ -40,11 +40,10 @@ const int enA = 10;  // 控制PWM
 const int enB = 11;
 
 // 馬達初始轉速和固定轉速
-const int initial_speed = 130;  // 初始轉速 (0-255)
+const int initial_speed = 120;  // 初始轉速 (0-255)
 const int fixed_speed = 90;  // 第一個固定轉速 (0-255)
 
-int speed;
-//const byte speed = 130;
+//轉彎速度
 const int turn_speed = 230;
 const int turn_speed_n = 190 ;
 
@@ -65,15 +64,15 @@ const int sensor4 = 22;
 const int sensor5 = 23;
 
 //超音波
-// Left
+// 左邊
 const byte trigPin1 = 24;  
 const byte echoPin1 = 25;  
 int distance1;             
-// Right
+// 右邊
 const byte trigPin2 = 26;  
 const byte echoPin2 = 27;  
 int distance2;             
-// Back
+// 後方
 const byte trigPin3 = 28;  
 const byte echoPin3 = 29;  
 int distance3;    
@@ -103,13 +102,21 @@ unsigned long ping3() {
 // can 2 => b => e
 // can 3 => b => e
 // can 4 => c
+String collect;
 
+<<<<<<< HEAD
 void setup() { 
 
+=======
+void setup() {
+    
+>>>>>>> 095407aa82ee078eab96bdbcac1aad93b6131d65
   Serial.begin(115200);
   Serial1.begin(115200); 
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
+  Serial.println("請放置卡片");  // 提示請放置卡片
+
 
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
@@ -119,7 +126,7 @@ void setup() {
   pinMode(enA, OUTPUT);
   pinMode(enB, OUTPUT);
 
-   // 設置馬達初始轉速
+  // 設置馬達初始轉速
   analogWrite(enA, initial_speed);
   analogWrite(enB, initial_speed);
 
@@ -140,28 +147,37 @@ void setup() {
   
   pinMode(RX, INPUT);
   pinMode(TX, OUTPUT);
-           
-  Serial.println("請放置卡片");  // 提示請放置卡片
-  while (!Serial1) {}
 
-    if (!rf95.init()) {
+  while (!Serial1) {}
+  if (!rf95.init()) {
     Serial.println("init failed");
     while (1);
   }
   rf95.setFrequency(433.0);
-
 }
 
 void loop() {
-  tracing();
+    if(rf95.available()){
+    //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
+    uint8_t buf[2];
+    uint8_t len = sizeof(buf);
+    if (rf95.recv(buf, &len)) {
+      //Serial.print("got request: ");
+      //Serial.print("NowAt:");
+      Serial.println((char*)buf);
+      collect = (char*)buf;
+      delay(1000);
+    }
+  } 
+  tracing(collect);
   rfidRead();
   ulDistance();
 }
 
 void startVehicle() {
-  startInitialSpeedTimer(); // 重新启动计时器
+  startInitialSpeedTimer(); // 重新啟動計時器
   last_stop_time = millis();
-  // 启动车辆并设置为初始速度
+  // 啟動車輛並設置為初始速度
   analogWrite(enA, initial_speed);
   analogWrite(enB, initial_speed);
   vehicle_stopped = false;

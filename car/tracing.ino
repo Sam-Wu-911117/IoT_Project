@@ -1,4 +1,4 @@
-void tracing() {
+void tracing(String collect) {
   int data[5];
   data[0] = digitalRead(sensor1);  //讀取個傳感器值
   data[1] = digitalRead(sensor2);
@@ -13,15 +13,15 @@ void tracing() {
   Serial.print(data[2]);
   Serial.print(" senor4= ");
   Serial.print(data[3]);
-  Serial.print("senor5= ");
+  Serial.print(" senor5= ");
   Serial.println(data[4]);
 
-   // 檢查是否需要改變速度
+  // 檢查是否需要改變速度
   if (millis() - initial_speed_start_time > initial_speed_duration) {
     // 已經過了一段時間，改變馬達速度
     setInitialSpeed(fixed_speed);
   }
-  // 检查车辆是否停止
+  // 檢查車輛是否停止
   if (vehicle_stopped) {
     // 如果停止了，检查是否需要重新启动
     if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {
@@ -31,38 +31,46 @@ void tracing() {
       stop();
     }
   }
-
-
-  
-  if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  //只有中間測到黑線
+  //只有中間測到黑線
+  if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  
     Forward();
+    Serial.println("Forward");
   }
-   else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 && data[4]==1){  //左邊檢測到黑線
-    TurnLeft();
+  //車輛右偏
+  else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
+    AdjustLeft(180,180);
+    Serial.println("Adjustleft");
   }
-  else if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-    TurnRight();
+  //左轉
+  else if(data[0]==0 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
+    BigTurnLeft();
+    Serial.println("TurnLeft");
   }
-   else if (data[0]==0 && data[1]==0 && data[2]==0 && data[3]==1 ) {  //左邊檢測到黑線
-     BigTurnLeft();
-   }
-   else if (data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0) {  //右邊檢測到黑線
-     BigTurnRight();
-   }
-  else{
+  //車輛左偏
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ 
+    AdjustRight(180,180);
+    Serial.println("Adjustright");
+  }
+  //右轉
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0){ 
+    BigTurnRight();
+    Serial.println("TurnRight");
+  }
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==1){
+    stop();
+  }
+  else if(data[0]==0 && data[1]==0 && data[2]==0 && data[3]==0 && data[4]==0){
     stop();
   }
 
-
-  
-//  switch (n){
-//    case  'A':
+//  switch (collect){
+//    case  "A1":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
 //        TurnRight();
 //      }
 //      break;
-//    case  'B':
+//    case "A2":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
 //        TurnRight();
@@ -71,7 +79,7 @@ void tracing() {
 //        TurnRight();
 //      }
 //      break;
-//    case  'C':
+//    case  "B1":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
 //        TurnRight();
@@ -80,7 +88,7 @@ void tracing() {
 //        TurnLeft();
 //      }
 //      break;
-//    case  'D':
+//    case  "B2":
 //      tracing();
 //      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
 //        TurnLeft();
