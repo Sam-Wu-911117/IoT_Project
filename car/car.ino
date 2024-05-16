@@ -104,7 +104,7 @@ unsigned long ping3() {
 // can 3 => b => e
 // can 4 => c
 
-void setup() {
+void setup() { 
 
   Serial.begin(115200);
   Serial1.begin(115200); 
