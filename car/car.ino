@@ -34,7 +34,7 @@ int cardCounts[MAX_CARDS] = { 0 };
 
 const int in1 = 4;   // 控制馬達1正轉
 const int in2 = 14;  // 控制馬達1反轉
-const int in3 = 6;   // 控制馬達2正轉
+const int in3 = 6;   // 控制馬達2正轉 //no
 const int in4 = 7;   // 控制馬達2反轉
 const int enA = 10;  // 控制PWM
 const int enB = 11;
@@ -62,7 +62,11 @@ const int sensor2 = 8;
 const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
+int data[5];
 
+const int intA = 1000; //200
+const int myTOP = 6250; //6250
+int DTIME;
 //超音波
 // 左邊
 const byte trigPin1 = 24;  
@@ -104,19 +108,13 @@ unsigned long ping3() {
 // can 4 => c
 String collect;
 
-<<<<<<< HEAD
-void setup() { 
-
-=======
 void setup() {
-    
->>>>>>> 095407aa82ee078eab96bdbcac1aad93b6131d65
   Serial.begin(115200);
   Serial1.begin(115200); 
+
   SPI.begin();        // 初始化SPI
   mfrc522.PCD_Init(); // 初始化MFRC522
   Serial.println("請放置卡片");  // 提示請放置卡片
-
 
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
@@ -154,9 +152,12 @@ void setup() {
     while (1);
   }
   rf95.setFrequency(433.0);
-}
 
-void loop() {
+}
+void loop() 
+{
+  Forward();
+  
     if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t buf[2];
@@ -166,11 +167,11 @@ void loop() {
       //Serial.print("NowAt:");
       Serial.println((char*)buf);
       collect = (char*)buf;
-      delay(1000);
+      //delay(1000);
     }
   } 
   tracing(collect);
-  rfidRead();
+  //rfidRead();
   ulDistance();
 }
 

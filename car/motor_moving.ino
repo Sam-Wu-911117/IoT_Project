@@ -1,11 +1,14 @@
 //前進
 void Forward() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
+  
+  digitalWrite(in2, 1);
+  digitalWrite(in3, 1);
   analogWrite(enA, fixed_speed);
   analogWrite(enB, fixed_speed);
+
+  digitalWrite(in1, 0);
+  digitalWrite(in4, 0);
+  
 }
 //後退
 void Back() {
