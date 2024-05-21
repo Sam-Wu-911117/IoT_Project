@@ -1,25 +1,22 @@
 //前進
 void Forward() {
-  
-  digitalWrite(in2, 1);
-  digitalWrite(in3, 1);
-  analogWrite(enA, fixed_speed);
-  analogWrite(enB, fixed_speed);
-
-  digitalWrite(in1, 0);
-  digitalWrite(in4, 0);
-  
-}
-//後退
-void Back() {
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
-  analogWrite(enA, turn_speed);
-  analogWrite(enB, turn_speed);
-  Serial.println("back");
+  analogWrite(enA, fixed_speed);
+  analogWrite(enB, fixed_speed);
 }
+//後退
+// void Back() {
+//   digitalWrite(in1, HIGH);
+//   digitalWrite(in2, LOW);
+//   digitalWrite(in3, LOW);
+//   digitalWrite(in4, HIGH);
+//   analogWrite(enA, turn_speed);
+//   analogWrite(enB, turn_speed);
+//   Serial.println("back");
+// }
 //左轉
 // void TurnLeft() {
 //   digitalWrite(in1, HIGH);
@@ -41,20 +38,20 @@ void Back() {
 
 //大左轉
 void BigTurnLeft() {
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
   analogWrite(enA, turn_speed_n);
   analogWrite(enB, turn_speed);
 }
 
 //大右轉
 void BigTurnRight() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   analogWrite(enA, turn_speed);
   analogWrite(enB, turn_speed_n);
 }
@@ -107,8 +104,8 @@ void SmallTurnRight() {
 void AdjustLeft(int Aspeed,int Bspeed) { 
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
   analogWrite(enA, Aspeed);
   analogWrite(enB, Bspeed);
 }
@@ -116,8 +113,8 @@ void AdjustLeft(int Aspeed,int Bspeed) {
 void AdjustRight(int Aspeed,int Bspeed) { 
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   analogWrite(enA, Aspeed);
   analogWrite(enB, Bspeed);
 }

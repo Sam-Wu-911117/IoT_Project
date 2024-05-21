@@ -26,7 +26,7 @@ void tracing(String collect) {
   }
   //車輛右偏
   else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
-    AdjustLeft(180,180);
+    AdjustLeft(170,170);
     Serial.println("Adjustleft");
   }
   //左轉
@@ -36,7 +36,7 @@ void tracing(String collect) {
   }
   //車輛左偏
   else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ 
-    AdjustRight(180,180);
+    AdjustRight(170,170);
     Serial.println("Adjustright");
   }
   //右轉

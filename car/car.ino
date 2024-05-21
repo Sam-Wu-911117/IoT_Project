@@ -32,16 +32,16 @@ Card cards[] = {
 };
 int cardCounts[MAX_CARDS] = { 0 };
 
-const int in1 = 4;   // 控制馬達1正轉
-const int in2 = 14;  // 控制馬達1反轉
-const int in3 = 6;   // 控制馬達2正轉 //no
-const int in4 = 7;   // 控制馬達2反轉
+const int in1 = 4;   // 控制左馬達反轉
+const int in2 = 14;  // 控制左馬達正轉
+const int in3 = 6;   // 控制右馬達反轉 
+const int in4 = 7;   // 控制右馬達正轉
 const int enA = 10;  // 控制PWM
 const int enB = 11;
 
 // 馬達初始轉速和固定轉速
-const int initial_speed = 120;  // 初始轉速 (0-255)
-const int fixed_speed = 90;  // 第一個固定轉速 (0-255)
+const int initial_speed = 130;  // 初始轉速 (0-255)
+const int fixed_speed = 95;  // 第一個固定轉速 (0-255)
 
 //轉彎速度
 const int turn_speed = 230;
@@ -64,9 +64,6 @@ const int sensor4 = 22;
 const int sensor5 = 23;
 int data[5];
 
-const int intA = 1000; //200
-const int myTOP = 6250; //6250
-int DTIME;
 //超音波
 // 左邊
 const byte trigPin1 = 24;  
@@ -156,9 +153,7 @@ void setup() {
 }
 void loop() 
 {
-  Forward();
-  
-    if(rf95.available()){
+  if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t buf[2];
     uint8_t len = sizeof(buf);
