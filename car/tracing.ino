@@ -21,7 +21,7 @@ void tracing(String collect) {
   }
   //只有中間測到黑線
   if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  
-    Forward();
+    Forward(fixed_speed);
     Serial.println("Forward");
   }
   //車輛右偏
@@ -29,9 +29,14 @@ void tracing(String collect) {
     AdjustLeft(170,170);
     Serial.println("Adjustleft");
   }
+  //極右偏
+  else if(data[0]==0 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==1){ 
+    AdjustLeft(190,190);
+    Serial.println("Adjustleft");
+  }
   //左轉
-  else if(data[0]==0 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
-    BigTurnLeft();
+  else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
+    AdjustLeft(160,190);
     Serial.println("TurnLeft");
   }
   //車輛左偏
@@ -39,16 +44,21 @@ void tracing(String collect) {
     AdjustRight(170,170);
     Serial.println("Adjustright");
   }
+  //極左偏
+  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==0){ 
+    AdjustRight(190,190);
+    Serial.println("Adjustright");
+  }  
   //右轉
-  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==0){ 
-    BigTurnRight();
+  else if(data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==1){ 
+    AdjustRight(190,160);
     Serial.println("TurnRight");
   }
   else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==1){
     stop();
   }
   else if(data[0]==0 && data[1]==0 && data[2]==0 && data[3]==0 && data[4]==0){
-    stop();
+    Forward(70);
   }
 
 //  switch (collect){

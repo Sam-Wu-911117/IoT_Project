@@ -1,11 +1,11 @@
 //前進
-void Forward() {
+void Forward(int speed) {
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
-  analogWrite(enA, fixed_speed);
-  analogWrite(enB, fixed_speed);
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
 }
 //後退
 // void Back() {
@@ -100,7 +100,7 @@ void SmallTurnRight() {
   Serial.println("Small right");
   delay(1000);
 }
-//偏右校正
+//偏右校正，左往後，右往前
 void AdjustLeft(int Aspeed,int Bspeed) { 
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
