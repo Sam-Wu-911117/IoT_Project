@@ -25,28 +25,36 @@ void tracing(String collect) {
   switch(sensorvalue){
     //只有中間測到黑線:11011
     case 27:
-      Forward(fixed_speed);
-      Serial.println("Forward");
+      Forward(80);
+      //Serial.println("Forward");
       break;
     //車輛右偏:10111
     case 23:
       AdjustLeft(170,170);
-      Serial.println("Adjustleft");
+      //Serial.println("Adjustleft");
       break;
     //極右偏:01111
     case 15:
       AdjustLeft(190,190);
-      Serial.println("Adjustleft");
+      //Serial.println("Adjustleft");
+      break;
+    //右轉:11100
+    case 28:
+      BigTurnRight(210,190);
       break;
     //車輛左偏:11101
     case 29:
       AdjustRight(170,170);
-      Serial.println("Adjustright");
+      //Serial.println("Adjustright");
       break;
     //極左偏:11110
     case 30:
       AdjustRight(190,190);
-      Serial.println("Adjustright");
+      //Serial.println("Adjustright");
+      break;
+    //左轉:00111
+    case 7:
+      BigTurnLeft(190,210);
       break;
     //停止:11111 
     case 31:

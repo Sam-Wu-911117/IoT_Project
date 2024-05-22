@@ -37,19 +37,19 @@ void Forward(int speed) {
 // }
 
 //大左轉
-void BigTurnLeft() {
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+void BigTurnLeft(int turn_speed_n,int turn_speed) {
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   analogWrite(enA, turn_speed_n);
   analogWrite(enB, turn_speed);
 }
 
 //大右轉
-void BigTurnRight() {
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
+void BigTurnRight(int turn_speed,int turn_speed_n ) {
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
   analogWrite(enA, turn_speed);
