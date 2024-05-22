@@ -4,6 +4,8 @@ void tracing(String collect) {
   data[2] = digitalRead(sensor3);
   data[3] = digitalRead(sensor4);
   data[4] = digitalRead(sensor5);
+  sensorvalue=data[0]*16+data[1]*8+data[2]*4+data[3]*2+data[4]*1;
+  //Serial.println(sensor);
   // 檢查是否需要改變速度
   if (millis() - initial_speed_start_time > initial_speed_duration) {
     // 已經過了一段時間，改變馬達速度
@@ -12,53 +14,51 @@ void tracing(String collect) {
   // 檢查車輛是否停止
   if (vehicle_stopped) {
     // 如果停止了，检查是否需要重新启动
-    if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {
+    if (sensorvalue==27) {
+      //11011
       startVehicle();
     }
     else {
       stop();
     }
   }
-  //只有中間測到黑線
-  if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==1) {  
-    Forward(fixed_speed);
-    Serial.println("Forward");
-  }
-  //車輛右偏
-  else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
-    AdjustLeft(170,170);
-    Serial.println("Adjustleft");
-  }
-  //極右偏
-  else if(data[0]==0 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==1){ 
-    AdjustLeft(190,190);
-    Serial.println("Adjustleft");
-  }
-  //左轉
-  else if(data[0]==1 && data[1]==0 && data[2]==1 && data[3]==1 && data[4]==1){ 
-    AdjustLeft(160,190);
-    Serial.println("TurnLeft");
-  }
-  //車輛左偏
-  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==0 && data[4]==1){ 
-    AdjustRight(170,170);
-    Serial.println("Adjustright");
-  }
-  //極左偏
-  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==0){ 
-    AdjustRight(190,190);
-    Serial.println("Adjustright");
-  }  
-  //右轉
-  else if(data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==1){ 
-    AdjustRight(190,160);
-    Serial.println("TurnRight");
-  }
-  else if(data[0]==1 && data[1]==1 && data[2]==1 && data[3]==1 && data[4]==1){
-    stop();
-  }
-  else if(data[0]==0 && data[1]==0 && data[2]==0 && data[3]==0 && data[4]==0){
-    Forward(70);
+  switch(sensorvalue){
+    //只有中間測到黑線:11011
+    case 27:
+      Forward(fixed_speed);
+      Serial.println("Forward");
+      break;
+    //車輛右偏:10111
+    case 23:
+      AdjustLeft(170,170);
+      Serial.println("Adjustleft");
+      break;
+    //極右偏:01111
+    case 15:
+      AdjustLeft(190,190);
+      Serial.println("Adjustleft");
+      break;
+    //車輛左偏:11101
+    case 29:
+      AdjustRight(170,170);
+      Serial.println("Adjustright");
+      break;
+    //極左偏:11110
+    case 30:
+      AdjustRight(190,190);
+      Serial.println("Adjustright");
+      break;
+    //停止:11111 
+    case 31:
+      stop();
+      break;
+    //減速:00000
+    case 0:
+      Forward(70);
+      break;
+    default:
+      stop();
+      break;
   }
 
 //  switch (collect){

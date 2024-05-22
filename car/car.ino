@@ -63,6 +63,7 @@ const int sensor3 = 9;
 const int sensor4 = 22;
 const int sensor5 = 23;
 int data[5];
+int sensorvalue;
 
 //超音波
 // 左邊
