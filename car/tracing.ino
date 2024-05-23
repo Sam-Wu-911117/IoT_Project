@@ -47,6 +47,16 @@ void tracing(String collect) {
       AdjustRight(170,170);
       //Serial.println("Adjustright");
       break;
+    //車輛小左偏:11001
+    case 25:
+      AdjustRight(170,170);
+      //Serial.println("Adjustright");
+      break;
+    //車輛小右偏:10011
+    case 19:
+      AdjustLeft(170,170);
+      //Serial.println("Adjustleft");
+      break;
     //極左偏:11110
     case 30:
       AdjustRight(190,190);
