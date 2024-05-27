@@ -1,3 +1,50 @@
+void sketch(){
+  
+  if(count<50){
+    analogWrite(EA, 100); // 馬達 的 PWM 輸出
+    digitalWrite(IA1, HIGH); //
+    digitalWrite(IA2, LOW); //
+    Serial.print(Encoder); 
+    Serial.print(";");
+    Serial.println(count);
+    
+  }
+  
+  else if(50<=count&&count<100){
+    analogWrite(EA, 100); // 馬達 的 PWM 輸出
+    digitalWrite(IA1, LOW); //
+    digitalWrite(IA2 , HIGH); //
+    Serial.print(Encoder); 
+    Serial.print(";");
+    Serial.println(count);
+  }
+  
+  else {
+    analogWrite(EA, 0); // 馬達 的 PWM 輸出
+    digitalWrite(IA1, LOW); //
+    digitalWrite(IA2 , LOW); //
+    Serial.print(Encoder); 
+    Serial.print(";");
+    Serial.println(count);
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //unsigned int count=0;//圈數
 //int counterPin = 2;//編碼器接腳
 //unsigned int Encoder_O;// 當前編碼器信號
