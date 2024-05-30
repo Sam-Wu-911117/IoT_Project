@@ -1,5 +1,3 @@
-
-
 void tracing(String collect) {
   data[0] = digitalRead(sensor1);  //讀取個傳感器值
   data[1] = digitalRead(sensor2);
@@ -81,39 +79,4 @@ void tracing(String collect) {
       stop();
       break;
   }
-
-
-
-//  switch (collect){
-//    case  "A1":
-//      tracing();
-//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-//        TurnRight();
-//      }
-//      break;
-//    case "A2":
-//      tracing();
-//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
-//        TurnRight();
-//      }
-//      else if (data[0]==0 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-//        TurnRight();
-//      }
-//      break;
-//    case  "B1":
-//      tracing();
-//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==0 && data[4]==0){
-//        TurnRight();
-//      }
-//      else if (data[0]==0 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-//        TurnLeft();
-//      }
-//      break;
-//    case  "B2":
-//      tracing();
-//      if (data[0]==1 && data[1]==1 && data[2]==0 && data[3]==1 && data[4]==0){
-//        TurnLeft();
-//      }
-//      break;
-//  }
 }

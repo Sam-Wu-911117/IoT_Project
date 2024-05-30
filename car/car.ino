@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 #include <SPI.h>
-#include <MFRC522.h> 
+// #include <MFRC522.h> 
 #include <RH_RF95.h>
 
 //softwareserial for rpi
@@ -16,21 +16,21 @@ SoftwareSerial Lora(RX,TX);//LoRa TX (yellow),RX (white)
 RH_RF95<SoftwareSerial> rf95(Lora);
 
 //RFID
-#define SS_PIN 53  // SDA uno 10,mega 53
-#define RST_PIN 5  //  RST uno 9, mega 5
+// #define SS_PIN 53  // SDA uno 10,mega 53
+// #define RST_PIN 5  //  RST uno 9, mega 5
 //SCK 13,MOSI 11,MISO 12 (uno)
 //SCK 52,MOSI 51,MISO 50 (Mega)
-char *reference;
-MFRC522 mfrc522(SS_PIN, RST_PIN);  // 建立MFRC522物件
-#define MAX_CARDS 4  // 最大不同卡號數量
-struct Card {
-  String cardIDs;
-  String cardNames;
-};
-Card cards[] = {
-  { "E0DD9218" ,"1" },{ "CC6F3BD5" ,"2" },{ "8054E119" ,"3" },{ "E0EAA718" ,"4" }
-};
-int cardCounts[MAX_CARDS] = { 0 };
+// char *reference;
+// MFRC522 mfrc522(SS_PIN, RST_PIN);  // 建立MFRC522物件
+// #define MAX_CARDS 4  // 最大不同卡號數量
+// struct Card {
+//   String cardIDs;
+//   String cardNames;
+// };
+// Card cards[] = {
+//   { "E0DD9218" ,"1" },{ "CC6F3BD5" ,"2" },{ "8054E119" ,"3" },{ "E0EAA718" ,"4" }
+// };
+// int cardCounts[MAX_CARDS] = { 0 };
 
 const int in1 = 4;   // 控制左馬達反轉
 const int in2 = 14;  // 控制左馬達正轉
@@ -179,6 +179,8 @@ void loop()
       //delay(1000);
     }
   } 
+  //TODO
+    //a、b區重量感測器滿傳high訊號
    if (digitalRead(FULL_BIN_A) == HIGH) {
         // Bin A is full
         moveToBinA();
@@ -195,7 +197,7 @@ void loop()
         turnaround();
    }
    if (digitalRead(FULL_BIN_B) == HIGH) {
-        // Bin A is full
+        // Bin B is full
         moveToBinB();
         pickUpBin();
         turnaround();
@@ -209,13 +211,6 @@ void loop()
         dropBin();
         turnaround();
    }
-
-   
-  /*
-  tracing(collect);
-  //rfidRead();
-  ulDistance();
-  */
 }
 
 void startVehicle() {
