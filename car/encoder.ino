@@ -1,3 +1,43 @@
+void pickUpBin(){
+    if(count<50){
+      analogWrite(EA, 100); // 馬達 的 PWM 輸出
+      digitalWrite(IA1, HIGH); //
+      digitalWrite(IA2, LOW); //
+      Serial.print(Encoder); 
+      Serial.print(";");
+      Serial.println(count);
+    }
+    else {
+      analogWrite(EA, 0); // 馬達 的 PWM 輸出
+      digitalWrite(IA1, LOW); //
+      digitalWrite(IA2 , LOW); //
+      Serial.print(Encoder); 
+      Serial.print(";");
+      Serial.println(count);
+    }
+}
+
+void dropBin(){
+    if(count<50){
+      analogWrite(EA, 100); // 馬達 的 PWM 輸出
+      digitalWrite(IA1, LOW); //
+      digitalWrite(IA2 , HIGH); //
+      Serial.print(Encoder); 
+      Serial.print(";");
+      Serial.println(count);
+    }
+    else {
+      analogWrite(EA, 0); // 馬達 的 PWM 輸出
+      digitalWrite(IA1, LOW); //
+      digitalWrite(IA2 , LOW); //
+      Serial.print(Encoder); 
+      Serial.print(";");
+      Serial.println(count);
+    }
+}
+
+
+/*
 void sketch(){
   
   if(count<50){
@@ -18,6 +58,7 @@ void sketch(){
     Serial.print(";");
     Serial.println(count);
   }
+
   
   else {
     analogWrite(EA, 0); // 馬達 的 PWM 輸出
@@ -29,7 +70,7 @@ void sketch(){
     
   }
 }
-
+*/
 
 
 

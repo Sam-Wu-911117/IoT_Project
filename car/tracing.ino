@@ -1,3 +1,5 @@
+
+
 void tracing(String collect) {
   data[0] = digitalRead(sensor1);  //讀取個傳感器值
   data[1] = digitalRead(sensor2);
@@ -74,10 +76,13 @@ void tracing(String collect) {
     case 0:
       Forward(70);
       break;
+
     default:
       stop();
       break;
   }
+
+
 
 //  switch (collect){
 //    case  "A1":

@@ -179,9 +179,43 @@ void loop()
       //delay(1000);
     }
   } 
+   if (digitalRead(FULL_BIN_A) == HIGH) {
+        // Bin A is full
+        moveToBinA();
+        pickUpBin();
+        turnaround();
+        moveToBinPosition();
+        dropBin();
+        turnaround();
+        moveToBinPosition();
+        pickUpBin();
+        turnaround();
+        moveToBinA();
+        dropBin();
+        turnaround();
+   }
+   if (digitalRead(FULL_BIN_B) == HIGH) {
+        // Bin A is full
+        moveToBinB();
+        pickUpBin();
+        turnaround();
+        moveToBinPosition();
+        dropBin();
+        turnaround();
+        moveToBinPosition();
+        pickUpBin();
+        turnaround();
+        moveToBinB();
+        dropBin();
+        turnaround();
+   }
+
+   
+  /*
   tracing(collect);
   //rfidRead();
   ulDistance();
+  */
 }
 
 void startVehicle() {
