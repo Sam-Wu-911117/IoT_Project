@@ -119,7 +119,7 @@ void AdjustRight(int Aspeed,int Bspeed) {
   analogWrite(enB, Bspeed);
 }
 
-void turnaround(){
+void turnaround(int Aspeed,int Bspeed){
   while(data[0]!=1 && data[1]!=1 && data[2]!=0 && data[3]!=1 && data[4]!=1){
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);

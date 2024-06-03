@@ -151,7 +151,7 @@ void setup() {
 
   Serial.begin(115200);
   pinMode(counterPinA, INPUT);
-  attachInterrupt(digitalPinToInterrupt(counterPinA),blink,CHANGE);
+  attachInterrupt(digitalPinToInterrupt(counterPinA),countnum,CHANGE);
 
  count = 0;
  Encoder = 0;
@@ -183,31 +183,31 @@ void loop()
     // Bin A is full
     moveToBinA();
     pickUpBin();
-    turnaround();
+    turnaround(250,250);
     moveToBinPosition();
     dropBin();
-    turnaround();
+    turnaround(250,250);
     moveToBinPosition();
     pickUpBin();
-    turnaround();
+    turnaround(250,250);
     moveToBinA();
     dropBin();
-    turnaround();
+    turnaround(250,250);
    }
   if (collect=="B1") {
     // Bin B is full
     moveToBinB();
     pickUpBin();
-    turnaround();
+    turnaround(250,250);
     moveToBinPosition();
     dropBin();
-    turnaround();
+    turnaround(250,250);
     moveToBinPosition();
     pickUpBin();
-    turnaround();
+    turnaround(250,250);
     moveToBinB();
     dropBin();
-    turnaround();
+    turnaround(250,250);
   }
 }
 

@@ -36,6 +36,19 @@ void dropBin(){
     }
 }
 
+void countnum(){
+  if(digitalRead(2) == HIGH){
+    Encoder=Encoder+1;
+  }
+  if(Encoder == 2000){
+    count=count+1;
+    Encoder = 0;
+  }
+}
+
+
+
+
 
 /*
 void sketch(){
@@ -115,12 +128,5 @@ void sketch(){
 //    Encoder = 0;
 //  }
 // }
-//void blink(){
-//  if(digitalRead(2) == HIGH){
-//  Encoder=Encoder+1;
-//  if(Encoder == 2000){
-//  count=count+1;
-//  Encoder = 0;
-//  }
-//}
-//}
+
+
