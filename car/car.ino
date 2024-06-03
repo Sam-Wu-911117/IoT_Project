@@ -115,9 +115,9 @@ void setup() {
   Serial.begin(115200);
   Serial1.begin(115200); 
 
-  SPI.begin();        // 初始化SPI
-  mfrc522.PCD_Init(); // 初始化MFRC522
-  Serial.println("請放置卡片");  // 提示請放置卡片
+  // SPI.begin();        // 初始化SPI
+  // mfrc522.PCD_Init(); // 初始化MFRC522
+  // Serial.println("請放置卡片");  // 提示請放置卡片
 
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
@@ -155,16 +155,15 @@ void setup() {
 
  count = 0;
  Encoder = 0;
-}
-
   while (!Serial1) {}
-  if (!rf95.init()) {
-    Serial.println("init failed");
-    while (1);
-  }
+    if (!rf95.init()) {
+      Serial.println("init failed");
+      while (1);
+    }
   rf95.setFrequency(433.0);
 
 }
+
 void loop() 
 {
   if(rf95.available()){
@@ -179,38 +178,37 @@ void loop()
       //delay(1000);
     }
   } 
-  //TODO
-    //a、b區重量感測器滿傳high訊號
-   if (digitalRead(FULL_BIN_A) == HIGH) {
-        // Bin A is full
-        moveToBinA();
-        pickUpBin();
-        turnaround();
-        moveToBinPosition();
-        dropBin();
-        turnaround();
-        moveToBinPosition();
-        pickUpBin();
-        turnaround();
-        moveToBinA();
-        dropBin();
-        turnaround();
+  //TODO:a、b區重量感測器滿傳high訊號
+  if (collect=="A1") {
+    // Bin A is full
+    moveToBinA();
+    pickUpBin();
+    turnaround();
+    moveToBinPosition();
+    dropBin();
+    turnaround();
+    moveToBinPosition();
+    pickUpBin();
+    turnaround();
+    moveToBinA();
+    dropBin();
+    turnaround();
    }
-   if (digitalRead(FULL_BIN_B) == HIGH) {
-        // Bin B is full
-        moveToBinB();
-        pickUpBin();
-        turnaround();
-        moveToBinPosition();
-        dropBin();
-        turnaround();
-        moveToBinPosition();
-        pickUpBin();
-        turnaround();
-        moveToBinB();
-        dropBin();
-        turnaround();
-   }
+  if (collect=="B1") {
+    // Bin B is full
+    moveToBinB();
+    pickUpBin();
+    turnaround();
+    moveToBinPosition();
+    dropBin();
+    turnaround();
+    moveToBinPosition();
+    pickUpBin();
+    turnaround();
+    moveToBinB();
+    dropBin();
+    turnaround();
+  }
 }
 
 void startVehicle() {

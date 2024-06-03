@@ -73,19 +73,6 @@ void sketch(){
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //unsigned int count=0;//圈數
 //int counterPin = 2;//編碼器接腳
 //unsigned int Encoder_O;// 當前編碼器信號

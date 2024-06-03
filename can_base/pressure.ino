@@ -1,7 +1,7 @@
-void pressure(String rfid){
-  Ser.print("NowAt");
-  Ser.print(":");
-  Ser.println(rfid);
+void pressure(){
+  // Ser.print("NowAt");
+  // Ser.print(":");
+  // Ser.println(rfid);
 
   sensorValues[0] = analogRead(PressurePin[0]);
   sensorValues[1] = analogRead(PressurePin[1]);
