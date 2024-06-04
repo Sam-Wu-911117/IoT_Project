@@ -1,19 +1,19 @@
 void moveToBinA(){
-  if(distance1 > 10 || distance2 > 10 || distance3 > 10){
+  if(distance1 > 6 || distance2 > 6 || distance3 > 10){
     tracinga();
     ulDistance();
   }
 }
 
 void moveToBinPosition(){
-  if(distance1 > 10 || distance2 > 10 || distance3 > 10){
+  if(distance1 > 6 || distance2 > 6 || distance3 > 10){
     tracingfull();
     ulDistance();
   }
 }
 
 void moveToBinB(){
-  if(distance1 > 10 || distance2 > 10 || distance3 > 10){
+  if(distance1 > 6 || distance2 > 6 || distance3 > 10){
     tracingb();
     ulDistance();
   }
