@@ -34,27 +34,27 @@ void setup() {
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
   //Serial.println("RF95 server test."); 
-  // if (!rf95.init()) {
-  //   Serial.println("init failed");
-  //   while (1);
-  // }
+  if (!rf95.init()) {
+    Serial.println("init failed");
+    while (1);
+  }
   rf95.setFrequency(433.0);
   while (!Ser) {}
 }
 
 void loop() {
-  // if(rf95.available()){
-  //   //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-  //   uint8_t buf[1];
-  //   uint8_t len = sizeof(buf);
-  //   if (rf95.recv(buf, &len)) {
-  //     //Serial.print("got request: ");
-  //     Serial.print("NowAt:");
-  //     Serial.println((char*)buf);
-  //     rfid = (char*)buf;
-  //     delay(1000);
-  //   } 
-  // }
+  if(rf95.available()){
+    //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
+    uint8_t buf[1];
+    uint8_t len = sizeof(buf);
+    if (rf95.recv(buf, &len)) {
+      //Serial.print("got request: ");
+      //Serial.print("NowAt:");
+      //Serial.println((char*)buf);
+      rfid = (char*)buf;
+      //delay(1000);
+    } 
+  }
   pressure();
   delay(1000);
 }
