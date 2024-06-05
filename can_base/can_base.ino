@@ -12,9 +12,11 @@ const byte TX = 3; //LoRa RX (white)
 SoftwareSerial COMSerial(RX,TX);  
 RH_RF95<SoftwareSerial> rf95(COMSerial);
 
-const int PressurePin[4] = {A0,A1,A2,A3};
-const int numSensors = 4;
-int sensorValues[numSensors]; 
+const int PressurePin[2] = {A0,A1};
+const int numSensors = 2;
+int fsrValuesBefore[numSensors];
+int fsrValuesAfter[numSensors];
+
 float weight[numSensors];
 float percentage[numSensors];
 // 定義壓力感測器的量程 (0.1kg ~ 10kg)
