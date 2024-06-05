@@ -76,8 +76,7 @@ const byte echoPin3 = 29;
 int distance3;    
 
 unsigned int count=0;//圈數
-int counterPinA = 2;//編碼器接腳
-//int counterPinB = 3;//編碼器接腳
+int counterPin = 2;//編碼器接腳
 unsigned int Encoder_O;// 當前編碼器信號
 const byte IA1 = 40; // 馬達的正轉接腳
 const byte IA2 = 41; // 馬達的反轉接腳
@@ -150,8 +149,8 @@ void setup() {
   pinMode(TX, OUTPUT);
 
   Serial.begin(115200);
-  pinMode(counterPinA, INPUT);
-  attachInterrupt(digitalPinToInterrupt(counterPinA),countnum,CHANGE);
+  pinMode(counterPin, INPUT);
+  attachInterrupt(digitalPinToInterrupt(counterPin),countnum,CHANGE);
 
  count = 0;
  Encoder = 0;
