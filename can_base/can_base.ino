@@ -14,9 +14,13 @@ RH_RF95<SoftwareSerial> rf95(COMSerial);
 
 const int PressurePin[2] = {A0,A1};
 const int numSensors = 2;
+<<<<<<< HEAD
 int fsrValuesBefore[numSensors];
 int fsrValuesAfter[numSensors];
 
+=======
+int sensorValues[numSensors]; 
+>>>>>>> 994107b229918b3ffd216f39e24fc56e9a3a1365
 float weight[numSensors];
 float percentage[numSensors];
 // 定義壓力感測器的量程 (0.1kg ~ 10kg)
@@ -30,8 +34,8 @@ void setup() {
 
   pinMode(PressurePin[0],INPUT);
   pinMode(PressurePin[1],INPUT);
-  pinMode(PressurePin[2],INPUT);
-  pinMode(PressurePin[3],INPUT);
+  //pinMode(PressurePin[2],INPUT);
+  //pinMode(PressurePin[3],INPUT);
   //rpi
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
