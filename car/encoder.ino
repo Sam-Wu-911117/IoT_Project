@@ -1,5 +1,5 @@
 void pickUpBin(){
-    if(count<50){
+    if(count<2){
       analogWrite(EA, 100); // 馬達 的 PWM 輸出
       digitalWrite(IA1, HIGH); //
       digitalWrite(IA2, LOW); //
@@ -18,7 +18,7 @@ void pickUpBin(){
 }
 
 void dropBin(){
-    if(count<50){
+    if(count<2){
       analogWrite(EA, 100); // 馬達 的 PWM 輸出
       digitalWrite(IA1, LOW); //
       digitalWrite(IA2 , HIGH); //
@@ -128,5 +128,3 @@ void sketch(){
 //    Encoder = 0;
 //  }
 // }
-
-

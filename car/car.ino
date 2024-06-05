@@ -149,7 +149,7 @@ void setup() {
   pinMode(TX, OUTPUT);
 
   Serial.begin(115200);
-  pinMode(counterPinA, INPUT);
+  pinMode(counterPin, INPUT);
   attachInterrupt(digitalPinToInterrupt(counterPin),countnum,CHANGE);
 
  count = 0;
