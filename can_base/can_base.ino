@@ -2,8 +2,8 @@
 #include <SoftwareSerial.h>
 
 //rpi
-const byte rx = A4; //gpio14
-const byte tx = A5; //gpio15
+const byte rx = 8; //gpio14
+const byte tx = 9; //gpio15
 SoftwareSerial Ser(rx,tx); 
 
 //LoRa
