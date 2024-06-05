@@ -12,8 +12,8 @@ const byte TX = 3; //LoRa RX (white)
 SoftwareSerial COMSerial(RX,TX);  
 RH_RF95<SoftwareSerial> rf95(COMSerial);
 
-const int PressurePin[4] = {A0,A1,A2,A3};
-const int numSensors = 4;
+const int PressurePin[2] = {A0,A1};
+const int numSensors = 2;
 int sensorValues[numSensors]; 
 float weight[numSensors];
 float percentage[numSensors];
@@ -28,8 +28,8 @@ void setup() {
 
   pinMode(PressurePin[0],INPUT);
   pinMode(PressurePin[1],INPUT);
-  pinMode(PressurePin[2],INPUT);
-  pinMode(PressurePin[3],INPUT);
+  //pinMode(PressurePin[2],INPUT);
+  //pinMode(PressurePin[3],INPUT);
   //rpi
   pinMode(rx,INPUT);
   pinMode(tx,OUTPUT);
