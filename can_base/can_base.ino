@@ -1,56 +1,79 @@
 #include <RH_RF95.h>
 #include <SoftwareSerial.h>
+#include <SPI.h>
 
-//rpi
-const byte rx = 8; //gpio14
-const byte tx = 9; //gpio15
-SoftwareSerial Ser(rx,tx); 
+// rpi
+const byte rx = 8; // gpio14
+const byte tx = 9; // gpio15
+SoftwareSerial Ser(rx, tx);
 
-//LoRa
-const byte RX = 2; //LoRa TX (yellow)
-const byte TX = 3; //LoRa RX (white)
-SoftwareSerial COMSerial(RX,TX);  
-RH_RF95<SoftwareSerial> rf95(COMSerial);
+// LoRa
+RH_RF95 rf95;
 
-const int PressurePin[2] = {A0,A1};
+// 传感器引脚
+const int PressurePin[2] = {A0, A1};
 const int numSensors = 2;
 
 int fsrValuesBefore[numSensors];
 int fsrValuesAfter[numSensors];
 int deltaValue[numSensors];
 
-String rfid,command;
+String rfid, command;
 char cmd[2];
+
 void setup() {
   Serial.begin(115200);
   Ser.begin(115200);
-  pinMode(PressurePin[0],INPUT);
-  pinMode(PressurePin[1],INPUT);
-  //rpi
-  pinMode(rx,INPUT);
-  pinMode(tx,OUTPUT);
-  //Serial.println("RF95 server test."); 
+  
+  // 初始化传感器引脚
+  pinMode(PressurePin[0], INPUT);
+  pinMode(PressurePin[1], INPUT);
+  
+  // 初始化 rpi 串口引脚
+  pinMode(rx, INPUT);
+  pinMode(tx, OUTPUT);
+
+  // 初始化 LoRa 模块
   if (!rf95.init()) {
-    Serial.println("init failed");
+    Serial.println("LoRa init failed");
     while (1);
   }
   rf95.setFrequency(433.0);
+
+  // 等待 Ser 就绪
   while (!Ser) {}
 }
 
 void loop() {
-  if(rf95.available()){
-    //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-    uint8_t buf[1];
+  // 检查是否有来自 LoRa 模块的数据
+  if (rf95.available()) {
+    uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t len = sizeof(buf);
     if (rf95.recv(buf, &len)) {
-      //Serial.print("got request: ");
-      //Serial.print("NowAt:");
-      //Serial.println((char*)buf);
       rfid = (char*)buf;
-      //delay(1000);
-    } 
+    }
   }
+
+  // 调用压力传感器处理函数
   pressure();
+
+  // 延时一秒
   delay(1000);
+}
+
+void pressure() {
+  for (int i = 0; i < numSensors; i++) {
+    fsrValuesBefore[i] = analogRead(PressurePin[i]);
+    delay(10);
+    fsrValuesAfter[i] = analogRead(PressurePin[i]);
+    deltaValue[i] = fsrValuesAfter[i] - fsrValuesBefore[i];
+  }
+
+  // 处理传感器数据
+  for (int i = 0; i < numSensors; i++) {
+    Serial.print("Sensor ");
+    Serial.print(i);
+    Serial.print(": ");
+    Serial.println(deltaValue[i]);
+  }
 }
