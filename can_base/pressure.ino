@@ -10,7 +10,7 @@ void pressure(){
   fsrValues2=analogRead(PressurePin[1]);
   //Serial.print(fsrValuesBefore[1]);
   
-  deltaValue[1]=abs(fsrValue2-96);
+  deltaValue[1]=abs(fsrValues2-96);
   Serial.print("delta1:");
   Serial.println(deltaValue[1]);
 

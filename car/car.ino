@@ -170,12 +170,11 @@ void loop() {
     if (rf95.recv(buf, &len)) {
       //Serial.println((char*)buf);
       collect = buf[0];
-      
-      Serial.println(collect);
-      
+      //Serial.println(collect);
       delay(1000);
     }
   } 
+  Serial.println(collect);
   //TODO:a、b區重量感測器滿傳high訊號
   if (collect==65) {
     // Bin A is full

@@ -12,11 +12,11 @@ void ulDistance() {
   // Serial.print("Distance3: ");
   // Serial.print(distance3);
   // Serial.println(" cm ");
-
+/*
   // 如果距離小於某個閾值，停止車子
   if (distance1 < 10 || distance2 < 10 || distance3 < 10) {
     stop(); // 停止車子
   }
-
+*/
   delay(1000);  // 延遲1000毫秒再次測量距離
 }

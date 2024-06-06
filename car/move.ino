@@ -1,8 +1,7 @@
 void moveToBinA(){
-  if(distance1 > 6 || distance2 > 6 || distance3 > 10){
-    tracinga();
-    ulDistance();
-  }
+  tracinga();
+  ulDistance();
+  
 }
 
 void moveToBinPosition(){
