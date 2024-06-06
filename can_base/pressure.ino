@@ -3,14 +3,14 @@ void pressure(){
   fsrValues1=analogRead(PressurePin[0]);
   //Serial.print(fsrValues1);
   
-  deltaValue[0]=fsrValues1-35;
+  deltaValue[0]=abs(fsrValues1-35);
   Serial.print("delta0:");
   Serial.println(deltaValue[0]);
 
   fsrValues2=analogRead(PressurePin[1]);
   //Serial.print(fsrValuesBefore[1]);
   
-  deltaValue[1]=fsrValuesAfter[1]-96;
+  deltaValue[1]=abs(fsrValue2-96);
   Serial.print("delta1:");
   Serial.println(deltaValue[1]);
 
