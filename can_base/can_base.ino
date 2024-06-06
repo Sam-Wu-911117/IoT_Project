@@ -8,7 +8,12 @@ const byte tx = 9; // gpio15
 SoftwareSerial Ser(rx, tx);
 
 // LoRa
-RH_RF95 rf95;
+
+const byte RX = 2; 
+const byte TX = 3; 
+SoftwareSerial Lora(RX,TX);//LoRa TX (yellow),RX (white)
+RH_RF95<SoftwareSerial> rf95(Lora);
+
 
 // 传感器引脚
 const int PressurePin[2] = {A0, A1};
@@ -18,8 +23,8 @@ int fsrValuesBefore[numSensors];
 int fsrValuesAfter[numSensors];
 int deltaValue[numSensors];
 
-String rfid, command;
-char cmd[2];
+String command;
+uint8_t cmd[sizeof(command)];
 
 void setup() {
   Serial.begin(115200);
@@ -46,34 +51,33 @@ void setup() {
 
 void loop() {
   // 检查是否有来自 LoRa 模块的数据
-  if (rf95.available()) {
-    uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-    uint8_t len = sizeof(buf);
-    if (rf95.recv(buf, &len)) {
-      rfid = (char*)buf;
-    }
-  }
-
+  // if (rf95.available()) {
+  //   uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
+  //   uint8_t len = sizeof(buf);
+  //   if (rf95.recv(buf, &len)) {
+  //     rfid = (char*)buf;
+  //   }
+  // }
   // 调用压力传感器处理函数
   pressure();
 
   // 延时一秒
-  delay(1000);
+  //delay(1000);
 }
 
-void pressure() {
-  for (int i = 0; i < numSensors; i++) {
-    fsrValuesBefore[i] = analogRead(PressurePin[i]);
-    delay(10);
-    fsrValuesAfter[i] = analogRead(PressurePin[i]);
-    deltaValue[i] = fsrValuesAfter[i] - fsrValuesBefore[i];
-  }
+// void pressure() {
+//   for (int i = 0; i < numSensors; i++) {
+//     fsrValuesBefore[i] = analogRead(PressurePin[i]);
+//     delay(10);
+//     fsrValuesAfter[i] = analogRead(PressurePin[i]);
+//     deltaValue[i] = fsrValuesAfter[i] - fsrValuesBefore[i];
+//   }
 
-  // 处理传感器数据
-  for (int i = 0; i < numSensors; i++) {
-    Serial.print("Sensor ");
-    Serial.print(i);
-    Serial.print(": ");
-    Serial.println(deltaValue[i]);
-  }
-}
+//   // 处理传感器数据
+//   for (int i = 0; i < numSensors; i++) {
+//     Serial.print("Sensor ");
+//     Serial.print(i);
+//     Serial.print(": ");
+//     Serial.println(deltaValue[i]);
+//   }
+// }

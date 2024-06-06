@@ -108,7 +108,7 @@ unsigned long ping3() {
 // can 2 => b => e
 // can 3 => b => e
 // can 4 => c
-String collect;
+int collect;
 
 void setup() {
   Serial.begin(115200);
@@ -155,30 +155,29 @@ void setup() {
  count = 0;
  Encoder = 0;
   while (!Serial1) {}
-    if (!rf95.init()) {
-      Serial.println("init failed");
-      while (1);
-    }
+  if (!rf95.init()) {
+    Serial.println("init failed");
+    while (1);
+  }
   rf95.setFrequency(433.0);
-
 }
 
-void loop() 
-{
+void loop() {
   if(rf95.available()){
     //uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-    uint8_t buf[2];
+    uint8_t buf[1];
     uint8_t len = sizeof(buf);
     if (rf95.recv(buf, &len)) {
-      //Serial.print("got request: ");
-      //Serial.print("NowAt:");
-      Serial.println((char*)buf);
-      collect = (char*)buf;
-      //delay(1000);
+      //Serial.println((char*)buf);
+      collect = buf[0];
+      
+      Serial.println(collect);
+      
+      delay(1000);
     }
   } 
   //TODO:a、b區重量感測器滿傳high訊號
-  if (collect=="A1") {
+  if (collect==65) {
     // Bin A is full
     moveToBinA();
     pickUpBin();
@@ -192,8 +191,8 @@ void loop()
     moveToBinA();
     dropBin();
     turnaround(250,250);
-   }
-  if (collect=="B1") {
+  }
+  if (collect==66) {
     // Bin B is full
     moveToBinB();
     pickUpBin();
