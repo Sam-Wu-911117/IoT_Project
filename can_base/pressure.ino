@@ -16,13 +16,13 @@ void pressure(){
   Serial.print("delta1:");
   Serial.println(deltaValue[1]);
 
-  if( deltaValue[0]>deltaValue[1]){
+  if(deltaValue[0]>144){
     command ="A";
     Serial.println("A");
     
   }
 
-  if( deltaValue[1]>deltaValue[0]){
+  if( deltaValue[1]>270){
     command = "B";
     Serial.println("B");
   }
