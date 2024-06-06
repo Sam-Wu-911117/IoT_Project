@@ -19,8 +19,8 @@ RH_RF95<SoftwareSerial> rf95(Lora);
 const int PressurePin[2] = {A0, A1};
 const int numSensors = 2;
 
-int fsrValuesBefore[numSensors];
-int fsrValuesAfter[numSensors];
+int fsrValues1;
+int fsrValues2;
 int deltaValue[numSensors];
 
 String command;
